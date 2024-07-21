@@ -1,8 +1,23 @@
+*,
+html,
+body {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: Arial, Helvetica, sans-serif;
+  color: white;
+}
 .jumbotron {
-  padding-top: 6rem;
-  background-color: #e2edff;
+  background-color: black;
+  padding-top: 50 px;
 }
 
 #project {
   background-color: #e2edff;
+}
+
+.bold {
+  font-family: Tahoma, Geneva, Verdana, sans-serif;
+  font-weight: bolder;
+  font-size: 3rem;
 }
