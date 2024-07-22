@@ -51,6 +51,6 @@ body {
 /* mobile phone */
 @media (max-width: 576px) {
   .hp {
-    font-size: 65%;
+    font-size: 20%;
   }
 }
