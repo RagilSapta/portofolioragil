@@ -45,13 +45,13 @@ body {
 /* tablet */
 @media (max-width: 768px) {
   html {
-    font-size: ;
+    font-size: 100%;
   }
 }
 
 /* mobile phone */
 @media (max-width: 576px) {
   .hp {
-    font-size: 80%;
+    font-size: 100%;
   }
 }
