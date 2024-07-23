@@ -1,57 +1,8 @@
-*,
-html,
-body {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-  font-family: Arial, Helvetica, sans-serif;
-  color: white;
-}
-
-:root {
-  --blue: rgb(54, 54, 255);
-  --black: black;
-  --shadow: 0 2px 2px rgb(0 0 0 / 0.5);
-  --border: 1px solid black;
-  --font: Tahoma;
-}
-
-.navbar {
-  font-family: var(--font);
-  font-weight: bolder;
-  box-shadow: var(--shadow);
-  background-color: var(--blue);
-}
-
 .jumbotron {
-  background-color: var(--black);
-  padding-top: 50 px;
-  min-height: 1200vh;
-  min-height: 100vh;
+  padding-top: 6rem;
+  background-color: #e2edff;
 }
 
 #project {
   background-color: #e2edff;
-}
-
-.bold {
-  font-family: Tahoma, Geneva, Verdana, sans-serif;
-  font-weight: bolder;
-  font-size: 3rem;
-}
-
-/* MEDIA QUERY */
-
-/* tablet */
-@media (max-width: 768px) {
-  html {
-    font-size: 100%;
-  }
-}
-
-/* mobile phone */
-@media (max-width: 576px) {
-  .hp {
-    font-size: 100%;
-  }
 }
