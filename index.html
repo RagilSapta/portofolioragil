@@ -8,6 +8,8 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous" />
     <!-- icon bootstrap -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" />
+    <!-- aos -->
+    <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
     <!-- css internal -->
     <link rel="stylesheet" href="style.css" />
   </head>
@@ -58,15 +60,15 @@
     <!-- akhir jumbo tron -->
 
     <!-- about -->
-    <section id="about" style="background-color: #2ca4bf; padding-top: 40px">
-      <div class="container">
+    <section id="about" style="background-color: #2ca4bf; padding-top: 65px">
+      <div class="container" data-aos-duration="1500">
         <div class="row text-center mb-3">
           <div class="col" style="color: white">
             <h2>About Me</h2>
           </div>
         </div>
         <div class="row justify-content-center fs-5 text-center">
-          <div class="col-md-4" style="color: white">
+          <div class="col-md-4" style="color: white" data-aos="fade-right" data-aos-offset="250">
             <p>
               Saya adalah seorang profesioanal yang memiliki etos kerja tinggi dan dikenal sebagai individu yang rajin serta berdedikasi dalam setiap tugas yang saya jalani. <br />
               Dengan pengalaman dan pengetahuan yang mendalam dalam industri kosmetik, saya memahami secara menyeluruh alur proses produksi dari bahan mentah yang datang hingga produk akhir (finish good).<br />
@@ -74,7 +76,7 @@
               Saya percaya bahwa kualitas kerja mencerminkan diri saya sebagai seorang profesional.
             </p>
           </div>
-          <div class="col-md-4" style="color: white">
+          <div class="col-md-4" style="color: white" data-aos="fade-left" data-aos-offset="250" data-aos-delay="200">
             <p>
               Oleh karena itu, saya selalu memastikan setiap tugas dilakukan dengan teliti, efisien, dan tepat waktu, saya tidak ragu untuk mengambil inisiatif dan selalu mencari cara untuk meningkatkan efisiensi dan efektivitas dalam
               proses kerja.<br />
@@ -95,8 +97,8 @@
     <!-- akhir about -->
 
     <!-- project -->
-    <section id="project" style="background-color: #bfbfbf; padding-top: 40px">
-      <div class="container">
+    <section id="project" style="background-color: #bfbfbf; padding-top: 65px">
+      <div class="container" data-aos-duration="500">
         <div class="row text-center mb-3">
           <div class="col">
             <h2>My Project</h2>
@@ -104,7 +106,7 @@
         </div>
         <div class="row justify-content-center">
           <div class="col-md-4 mb-3">
-            <div class="card" style="background-color: #2ca4bf">
+            <div class="card" style="background-color: #2ca4bf" data-aos="flip-left" data-aos-duration="500" data-aos-delay="100">
               <img src="asset/foto/GM1.jpg" class="card-img-top" alt="..." />
               <div class="card-body">
                 <p class="card-text" style="color: white">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
@@ -112,7 +114,7 @@
             </div>
           </div>
           <div class="col-md-4 mb-3">
-            <div class="card" style="background-color: #2ca4bf">
+            <div class="card" style="background-color: #2ca4bf" data-aos="flip-left" data-aos-duration="500" data-aos-delay="200">
               <img src="asset/foto/GM2.jpg" class="card-img-top" alt="..." />
               <div class="card-body">
                 <p class="card-text" style="color: white">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
@@ -120,7 +122,7 @@
             </div>
           </div>
           <div class="col-md-4 mb-3">
-            <div class="card" style="background-color: #2ca4bf">
+            <div class="card" style="background-color: #2ca4bf" data-aos="flip-left" data-aos-duration="500" data-aos-delay="300">
               <img src="asset/foto/GM2.jpg" class="card-img-top" alt="..." />
               <div class="card-body">
                 <p class="card-text" style="color: white">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
@@ -128,7 +130,7 @@
             </div>
           </div>
           <div class="col-md-4 mb-3">
-            <div class="card" style="background-color: #2ca4bf">
+            <div class="card" style="background-color: #2ca4bf" data-aos="flip-left" data-aos-duration="500" data-aos-delay="400">
               <img src="asset/foto/GM2.jpg" class="card-img-top" alt="..." />
               <div class="card-body">
                 <p class="card-text" style="color: white">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
@@ -136,7 +138,7 @@
             </div>
           </div>
           <div class="col-md-4 mb-3">
-            <div class="card" style="background-color: #2ca4bf">
+            <div class="card" style="background-color: #2ca4bf" data-aos="flip-left" data-aos-duration="500" data-aos-delay="500">
               <img src="asset/foto/GM2.jpg" class="card-img-top" alt="..." />
               <div class="card-body">
                 <p class="card-text" style="color: white">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
@@ -216,6 +218,14 @@
 
     <!-- JAVA SCRIPT -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+
+    <!-- aos -->
+    <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+    <script>
+      AOS.init({
+        once: true,
+      });
+    </script>
 
     <!-- google form -->
     <script>
