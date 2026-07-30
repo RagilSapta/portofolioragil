@@ -3,19 +3,19 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Ragil Sapta - Portfolio</title>
+  <title>Ragil Sapta — Portfolio</title>
   <!-- Bootstrap 5 -->
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" />
   <!-- Bootstrap Icons -->
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" />
   <!-- AOS -->
   <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
-  <!-- Google Font (Inter) -->
+  <!-- Google Font: Inter -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,600;14..32,700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,500;14..32,600;14..32,700&display=swap" rel="stylesheet">
   <style>
-    /* ===== RESET & GLOBAL ===== */
+    /* ===== RESET ===== */
     * {
       margin: 0;
       padding: 0;
@@ -24,9 +24,10 @@
 
     body {
       font-family: 'Inter', sans-serif;
-      background-color: #f8fafc;
-      color: #1e293b;
+      background-color: #f5f7fa;
+      color: #1e2a3a;
       scroll-behavior: smooth;
+      -webkit-font-smoothing: antialiased;
     }
 
     section {
@@ -34,76 +35,83 @@
       padding-bottom: 40px;
     }
 
+    /* ===== TYPOGRAPHY ===== */
     h2 {
       font-weight: 700;
       letter-spacing: -0.02em;
       position: relative;
       display: inline-block;
+      margin-bottom: 1.8rem;
     }
 
     h2:after {
       content: '';
       position: absolute;
-      bottom: -8px;
+      bottom: -10px;
       left: 50%;
       transform: translateX(-50%);
-      width: 60px;
-      height: 4px;
-      background: #2ca4bf;
+      width: 56px;
+      height: 3px;
+      background: #7c8ea0;
       border-radius: 4px;
     }
 
+    .section-light h2:after {
+      background: #7c8ea0;
+    }
+
     .section-dark h2:after {
-      background: #facc15;
+      background: #c0c8d2;
     }
 
     /* ===== NAVBAR ===== */
     .navbar {
-      background-color: rgba(44, 164, 191, 0.92) !important;
-      backdrop-filter: blur(8px);
-      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+      background: rgba(44, 62, 80, 0.92) !important;
+      backdrop-filter: blur(12px);
+      box-shadow: 0 2px 24px rgba(0, 0, 0, 0.06);
       transition: all 0.3s ease;
     }
 
     .navbar-brand {
       font-weight: 700;
-      letter-spacing: -0.5px;
-      font-size: 1.5rem;
+      letter-spacing: -0.3px;
+      font-size: 1.35rem;
+      color: #ffffff !important;
     }
 
     .navbar-brand span {
-      color: #facc15;
+      color: #b0c4d9;
     }
 
     .nav-link {
       font-weight: 500;
-      padding: 0.5rem 1rem !important;
-      border-radius: 30px;
+      padding: 0.5rem 1.1rem !important;
+      border-radius: 40px;
       transition: all 0.3s ease;
-      color: rgba(255, 255, 255, 0.85) !important;
+      color: rgba(255, 255, 255, 0.8) !important;
+      font-size: 0.95rem;
     }
 
     .nav-link:hover,
     .nav-link.active {
-      background: rgba(255, 255, 255, 0.2);
+      background: rgba(255, 255, 255, 0.12);
       color: #ffffff !important;
     }
 
-    /* ===== JUMBOTRON / HERO ===== */
+    /* ===== HERO ===== */
     .hero {
-      background: linear-gradient(145deg, #f1f5f9 0%, #e2e8f0 100%);
+      background: linear-gradient(160deg, #eef2f7 0%, #dce3ec 100%);
       padding-top: 120px;
-      padding-bottom: 40px;
+      padding-bottom: 30px;
       position: relative;
-      overflow: hidden;
     }
 
     .hero .profile-img {
-      width: 180px;
-      height: 180px;
+      width: 170px;
+      height: 170px;
       object-fit: cover;
-      border: 6px solid #ffffff;
-      box-shadow: 0 20px 40px -12px rgba(0, 0, 0, 0.2);
+      border: 5px solid #ffffff;
+      box-shadow: 0 16px 40px -8px rgba(0, 0, 0, 0.12);
       transition: transform 0.4s ease;
     }
 
@@ -113,45 +121,47 @@
 
     .hero h1 {
       font-weight: 700;
-      font-size: 3.2rem;
-      letter-spacing: -0.03em;
-      color: #0f172a;
+      font-size: 3rem;
+      letter-spacing: -0.02em;
+      color: #1e2a3a;
       margin-top: 1.2rem;
     }
 
     .hero h1 span {
-      color: #2ca4bf;
+      color: #4a5f73;
+      font-weight: 300;
     }
 
     .hero .lead {
-      max-width: 720px;
+      max-width: 740px;
       margin: 1.2rem auto 0;
-      font-size: 1.15rem;
+      font-size: 1.05rem;
       line-height: 1.7;
-      color: #334155;
+      color: #2c3e50;
+      font-weight: 400;
     }
 
     .hero .badge-group {
       margin-top: 2rem;
-      gap: 0.75rem;
+      gap: 0.7rem;
       flex-wrap: wrap;
       justify-content: center;
     }
 
     .hero .badge-group .badge {
-      background: #2ca4bf;
+      background: #4a5f73;
       color: #fff;
       font-weight: 500;
-      padding: 0.6rem 1.4rem;
+      padding: 0.5rem 1.4rem;
       border-radius: 40px;
-      font-size: 0.9rem;
-      letter-spacing: 0.3px;
+      font-size: 0.85rem;
+      letter-spacing: 0.2px;
     }
 
-    /* ===== ABOUT ===== */
+    /* ===== ABOUT (section gelap) ===== */
     #about {
-      background-color: #2ca4bf;
-      color: #ffffff;
+      background-color: #2c3e50;
+      color: #e8edf2;
     }
 
     #about h2 {
@@ -159,94 +169,97 @@
     }
 
     #about h2:after {
-      background: #facc15;
+      background: #b0c4d9;
     }
 
     #about .about-card {
-      background: rgba(255, 255, 255, 0.08);
+      background: rgba(255, 255, 255, 0.06);
       backdrop-filter: blur(4px);
-      border-radius: 24px;
+      border-radius: 20px;
       padding: 2rem 1.8rem;
       height: 100%;
-      border: 1px solid rgba(255, 255, 255, 0.15);
+      border: 1px solid rgba(255, 255, 255, 0.07);
       transition: all 0.3s ease;
     }
 
     #about .about-card:hover {
-      background: rgba(255, 255, 255, 0.15);
-      transform: translateY(-4px);
+      background: rgba(255, 255, 255, 0.10);
+      transform: translateY(-3px);
     }
 
     #about .about-card p {
-      font-size: 1rem;
+      font-size: 0.98rem;
       line-height: 1.8;
       font-weight: 300;
       margin-bottom: 0;
+      color: #dce3ec;
     }
 
     /* ===== PROJECTS ===== */
     #project {
-      background-color: #f8fafc;
+      background-color: #f5f7fa;
     }
 
     #project h2:after {
-      background: #2ca4bf;
+      background: #7c8ea0;
     }
 
     .project-card {
       background: #ffffff;
       border: none;
-      border-radius: 24px;
+      border-radius: 20px;
       overflow: hidden;
-      box-shadow: 0 8px 30px rgba(0, 0, 0, 0.06);
+      box-shadow: 0 6px 24px rgba(0, 0, 0, 0.04);
       transition: all 0.35s ease;
       height: 100%;
     }
 
     .project-card:hover {
-      transform: translateY(-8px);
-      box-shadow: 0 20px 40px -8px rgba(44, 164, 191, 0.25);
+      transform: translateY(-6px);
+      box-shadow: 0 16px 40px -8px rgba(44, 62, 80, 0.12);
     }
 
     .project-card img {
-      height: 200px;
+      height: 190px;
       object-fit: cover;
-      border-bottom: 3px solid #2ca4bf;
+      border-bottom: 2px solid #dce3ec;
     }
 
     .project-card .card-body {
-      padding: 1.5rem 1.2rem;
+      padding: 1.4rem 1.2rem;
     }
 
     .project-card .card-title {
       font-weight: 700;
-      font-size: 1.1rem;
-      color: #0f172a;
+      font-size: 1.05rem;
+      color: #1e2a3a;
     }
 
     .project-card .card-text {
-      color: #475569;
-      font-size: 0.95rem;
+      color: #4a5f73;
+      font-size: 0.92rem;
+      line-height: 1.5;
     }
 
     .project-card .btn-outline-custom {
-      border: 2px solid #2ca4bf;
-      color: #2ca4bf;
+      border: 2px solid #7c8ea0;
+      color: #2c3e50;
       border-radius: 40px;
-      padding: 0.4rem 1.2rem;
+      padding: 0.35rem 1.2rem;
       font-weight: 600;
-      font-size: 0.85rem;
+      font-size: 0.82rem;
       transition: all 0.3s ease;
     }
 
     .project-card .btn-outline-custom:hover {
-      background: #2ca4bf;
+      background: #2c3e50;
+      border-color: #2c3e50;
       color: #fff;
     }
 
     /* ===== TRAINING ===== */
     #training {
-      background-color: #2ca4bf;
+      background-color: #2c3e50;
     }
 
     #training h2 {
@@ -254,47 +267,48 @@
     }
 
     #training h2:after {
-      background: #facc15;
+      background: #b0c4d9;
     }
 
     .training-card {
       background: #ffffff;
       border: none;
-      border-radius: 24px;
+      border-radius: 20px;
       overflow: hidden;
-      box-shadow: 0 8px 30px rgba(0, 0, 0, 0.08);
+      box-shadow: 0 6px 24px rgba(0, 0, 0, 0.06);
       transition: all 0.35s ease;
       height: 100%;
     }
 
     .training-card:hover {
-      transform: translateY(-6px);
-      box-shadow: 0 20px 40px -8px rgba(0, 0, 0, 0.2);
+      transform: translateY(-5px);
+      box-shadow: 0 16px 32px -8px rgba(0, 0, 0, 0.15);
     }
 
     .training-card img {
-      height: 180px;
+      height: 170px;
       object-fit: cover;
     }
 
     .training-card .card-body {
-      padding: 1.2rem 1rem;
+      padding: 1rem 0.8rem;
     }
 
     .training-card .card-title {
       font-weight: 700;
-      color: #0f172a;
-      font-size: 1rem;
+      color: #1e2a3a;
+      font-size: 0.95rem;
       text-align: center;
+      letter-spacing: 0.3px;
     }
 
     /* ===== CONTACT ===== */
     #contact {
-      background-color: #f8fafc;
+      background-color: #f5f7fa;
     }
 
     #contact h2:after {
-      background: #2ca4bf;
+      background: #7c8ea0;
     }
 
     .contact-item {
@@ -302,82 +316,86 @@
       align-items: center;
       gap: 1rem;
       background: #ffffff;
-      padding: 1rem 1.5rem;
+      padding: 0.9rem 1.5rem;
       border-radius: 60px;
-      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.04);
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.03);
       transition: all 0.3s ease;
-      border: 1px solid #e9edf2;
+      border: 1px solid #e2e8f0;
     }
 
     .contact-item:hover {
-      transform: translateY(-4px);
-      box-shadow: 0 12px 24px -8px rgba(44, 164, 191, 0.15);
-      border-color: #2ca4bf;
+      transform: translateY(-3px);
+      box-shadow: 0 12px 28px -8px rgba(44, 62, 80, 0.08);
+      border-color: #b0c4d9;
     }
 
     .contact-item i {
-      font-size: 1.8rem;
-      color: #2ca4bf;
-      width: 40px;
+      font-size: 1.6rem;
+      color: #4a5f73;
+      width: 36px;
       text-align: center;
     }
 
     .contact-item h3 {
-      font-size: 0.9rem;
+      font-size: 0.85rem;
       font-weight: 600;
       margin-bottom: 0;
-      color: #1e293b;
+      color: #1e2a3a;
+      letter-spacing: 0.2px;
     }
 
     .contact-item p {
       margin-bottom: 0;
-      color: #475569;
-      font-size: 0.95rem;
+      color: #4a5f73;
+      font-size: 0.92rem;
     }
 
     .form-control {
       border-radius: 30px;
-      padding: 0.75rem 1.2rem;
+      padding: 0.7rem 1.2rem;
       border: 2px solid #e2e8f0;
-      font-size: 0.95rem;
+      font-size: 0.92rem;
       transition: all 0.3s ease;
+      background: #ffffff;
     }
 
     .form-control:focus {
-      border-color: #2ca4bf;
-      box-shadow: 0 0 0 4px rgba(44, 164, 191, 0.15);
+      border-color: #7c8ea0;
+      box-shadow: 0 0 0 4px rgba(124, 142, 160, 0.12);
     }
 
     .btn-primary-custom {
-      background: #2ca4bf;
+      background: #2c3e50;
       border: none;
       border-radius: 40px;
       padding: 0.7rem 2.5rem;
       font-weight: 600;
       color: #fff;
       transition: all 0.3s ease;
+      letter-spacing: 0.3px;
     }
 
     .btn-primary-custom:hover {
-      background: #1f8a9e;
+      background: #1e2a3a;
       transform: translateY(-2px);
-      box-shadow: 0 8px 20px -6px rgba(44, 164, 191, 0.4);
+      box-shadow: 0 8px 20px -6px rgba(44, 62, 80, 0.3);
     }
 
     /* ===== FOOTER ===== */
     footer {
-      background: #1e293b !important;
+      background: #1e2a3a !important;
       padding: 1.5rem 0;
     }
 
     footer p {
       margin: 0;
-      color: #94a3b8;
+      color: #94a8b9;
       font-weight: 400;
+      font-size: 0.92rem;
     }
 
     footer a {
-      color: #facc15 !important;
+      color: #b0c4d9 !important;
       text-decoration: none;
       font-weight: 600;
       transition: color 0.3s ease;
@@ -387,7 +405,7 @@
       color: #ffffff !important;
     }
 
-    /* ===== WAVE SVG ===== */
+    /* ===== WAVE ===== */
     .wave-spacer {
       display: block;
       line-height: 0;
@@ -396,22 +414,23 @@
     /* ===== RESPONSIVE ===== */
     @media (max-width: 768px) {
       .hero h1 {
-        font-size: 2.4rem;
+        font-size: 2.2rem;
       }
 
       .hero .lead {
-        font-size: 1rem;
+        font-size: 0.95rem;
       }
 
       .contact-item {
         flex-direction: column;
         text-align: center;
-        padding: 1.2rem;
-        border-radius: 24px;
+        padding: 1rem;
+        border-radius: 20px;
       }
 
       .contact-item i {
-        font-size: 2rem;
+        font-size: 1.8rem;
+        width: auto;
       }
     }
   </style>
@@ -440,13 +459,13 @@
   <!-- ===== HERO ===== -->
   <section id="home" class="hero text-center">
     <div class="container">
-      <img src="asset/foto/r1.jpg" alt="Ragil Sapta" class="rounded-circle img-thumbnail profile-img" data-aos="zoom-in" data-aos-duration="800" />
-      <h1 data-aos="fade-up" data-aos-delay="150">Ragil <span>Sapta</span></h1>
-      <p class="lead mx-auto" data-aos="fade-up" data-aos-delay="250">
+      <img src="asset/foto/r1.jpg" alt="Ragil Sapta" class="rounded-circle img-thumbnail profile-img" data-aos="zoom-in" data-aos-duration="700" />
+      <h1 data-aos="fade-up" data-aos-delay="120">Ragil <span>Sapta</span></h1>
+      <p class="lead mx-auto" data-aos="fade-up" data-aos-delay="220">
         Lebih dari 5 tahun saya bekerja sebagai Quality Control di industri kosmetik, saya telah mengembangkan keahlian dan keterampilan saya dalam memastikan kualitas produk dan proses produksi di Industri Kosmetik, pengalaman saya
         mencakup berbagai aspek, mulai dari inspeksi bahan, produk hingga menerapkan sistem manajemen kualitas yang ketat.
       </p>
-      <div class="d-flex badge-group" data-aos="fade-up" data-aos-delay="350">
+      <div class="d-flex badge-group" data-aos="fade-up" data-aos-delay="320">
         <span class="badge"><i class="bi bi-check-circle-fill me-1"></i> QC Expert</span>
         <span class="badge"><i class="bi bi-mortarboard-fill me-1"></i> CPKB Certified</span>
         <span class="badge"><i class="bi bi-star-fill me-1"></i> 5+ Years</span>
@@ -455,21 +474,21 @@
     <!-- Wave -->
     <div class="wave-spacer">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320">
-        <path fill="#2ca4bf" fill-opacity="1" d="M0,256L24,250.7C48,245,96,235,144,224C192,213,240,203,288,176C336,149,384,107,432,90.7C480,75,528,85,576,101.3C624,117,672,139,720,149.3C768,160,816,160,864,138.7C912,117,960,75,1008,85.3C1056,96,1104,160,1152,192C1200,224,1248,224,1296,197.3C1344,171,1392,117,1416,90.7L1440,64L1440,320L1416,320C1392,320,1344,320,1296,320C1248,320,1200,320,1152,320C1104,320,1056,320,1008,320C960,320,912,320,864,320C816,320,768,320,720,320C672,320,624,320,576,320C528,320,480,320,432,320C384,320,336,320,288,320C240,320,192,320,144,320C96,320,48,320,24,320L0,320Z"></path>
+        <path fill="#2c3e50" fill-opacity="1" d="M0,256L24,250.7C48,245,96,235,144,224C192,213,240,203,288,176C336,149,384,107,432,90.7C480,75,528,85,576,101.3C624,117,672,139,720,149.3C768,160,816,160,864,138.7C912,117,960,75,1008,85.3C1056,96,1104,160,1152,192C1200,224,1248,224,1296,197.3C1344,171,1392,117,1416,90.7L1440,64L1440,320L1416,320C1392,320,1344,320,1296,320C1248,320,1200,320,1152,320C1104,320,1056,320,1008,320C960,320,912,320,864,320C816,320,768,320,720,320C672,320,624,320,576,320C528,320,480,320,432,320C384,320,336,320,288,320C240,320,192,320,144,320C96,320,48,320,24,320L0,320Z"></path>
       </svg>
     </div>
   </section>
 
   <!-- ===== ABOUT ===== -->
   <section id="about">
-    <div class="container" data-aos-duration="1200">
-      <div class="row text-center mb-5">
+    <div class="container" data-aos-duration="1100">
+      <div class="row text-center mb-4">
         <div class="col">
           <h2>About Me</h2>
         </div>
       </div>
       <div class="row g-4 justify-content-center">
-        <div class="col-md-5" data-aos="fade-right" data-aos-offset="200">
+        <div class="col-md-5" data-aos="fade-right" data-aos-offset="180">
           <div class="about-card">
             <p>
               Saya adalah seorang profesional yang memiliki etos kerja tinggi dan dikenal sebagai individu yang rajin serta berdedikasi dalam setiap tugas yang saya jalani. <br><br>
@@ -478,7 +497,7 @@
             </p>
           </div>
         </div>
-        <div class="col-md-5" data-aos="fade-left" data-aos-offset="200" data-aos-delay="200">
+        <div class="col-md-5" data-aos="fade-left" data-aos-offset="180" data-aos-delay="180">
           <div class="about-card">
             <p>
               Oleh karena itu, saya selalu memastikan setiap tugas dilakukan dengan teliti, efisien, dan tepat waktu, saya tidak ragu untuk mengambil inisiatif dan selalu mencari cara untuk meningkatkan efisiensi dan efektivitas dalam
@@ -493,7 +512,7 @@
     <!-- Wave -->
     <div class="wave-spacer">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320">
-        <path fill="#f8fafc" fill-opacity="1" d="M0,288L0,288L96,288L96,160L192,160L192,0L288,0L288,64L384,64L384,160L480,160L480,128L576,128L576,160L672,160L672,224L768,224L768,64L864,64L864,32L960,32L960,192L1056,192L1056,224L1152,224L1152,96L1248,96L1248,64L1344,64L1344,32L1440,32L1440,320L1344,320L1344,320L1248,320L1248,320L1152,320L1152,320L1056,320L1056,320L960,320L960,320L864,320L864,320L768,320L768,320L672,320L672,320L576,320L576,320L480,320L480,320L384,320L384,320L288,320L288,320L192,320L192,320L96,320L96,320L0,320L0,320Z"></path>
+        <path fill="#f5f7fa" fill-opacity="1" d="M0,288L0,288L96,288L96,160L192,160L192,0L288,0L288,64L384,64L384,160L480,160L480,128L576,128L576,160L672,160L672,224L768,224L768,64L864,64L864,32L960,32L960,192L1056,192L1056,224L1152,224L1152,96L1248,96L1248,64L1344,64L1344,32L1440,32L1440,320L1344,320L1344,320L1248,320L1248,320L1152,320L1152,320L1056,320L1056,320L960,320L960,320L864,320L864,320L768,320L768,320L672,320L672,320L576,320L576,320L480,320L480,320L384,320L384,320L288,320L288,320L192,320L192,320L96,320L96,320L0,320L0,320Z"></path>
       </svg>
     </div>
   </section>
@@ -501,14 +520,14 @@
   <!-- ===== PROJECTS ===== -->
   <section id="project">
     <div class="container">
-      <div class="row text-center mb-5">
+      <div class="row text-center mb-4">
         <div class="col">
           <h2>My Projects</h2>
         </div>
       </div>
       <div class="row g-4 justify-content-center">
         <!-- Project 1 -->
-        <div class="col-md-6 col-lg-3" data-aos="flip-left" data-aos-duration="600" data-aos-delay="100">
+        <div class="col-md-6 col-lg-3" data-aos="flip-left" data-aos-duration="500" data-aos-delay="80">
           <div class="project-card">
             <img src="asset/project1/RESUMEPO1.jpg" class="card-img-top" alt="Project 1" />
             <div class="card-body">
@@ -519,7 +538,7 @@
           </div>
         </div>
         <!-- Project 2 -->
-        <div class="col-md-6 col-lg-3" data-aos="flip-left" data-aos-duration="600" data-aos-delay="150">
+        <div class="col-md-6 col-lg-3" data-aos="flip-left" data-aos-duration="500" data-aos-delay="130">
           <div class="project-card">
             <img src="asset/project2/project2.jpg" class="card-img-top" alt="Project 2" />
             <div class="card-body">
@@ -530,7 +549,7 @@
           </div>
         </div>
         <!-- Project 3 -->
-        <div class="col-md-6 col-lg-3" data-aos="flip-left" data-aos-duration="600" data-aos-delay="200">
+        <div class="col-md-6 col-lg-3" data-aos="flip-left" data-aos-duration="500" data-aos-delay="180">
           <div class="project-card">
             <img src="asset/project3/webportofolio.jpg" class="card-img-top" alt="Project 3" />
             <div class="card-body">
@@ -541,7 +560,7 @@
           </div>
         </div>
         <!-- Project 4 -->
-        <div class="col-md-6 col-lg-3" data-aos="flip-left" data-aos-duration="600" data-aos-delay="250">
+        <div class="col-md-6 col-lg-3" data-aos="flip-left" data-aos-duration="500" data-aos-delay="230">
           <div class="project-card">
             <img src="asset/project4/takoyaki.jpg" class="card-img-top" alt="Project 4" />
             <div class="card-body">
@@ -556,7 +575,7 @@
     <!-- Wave -->
     <div class="wave-spacer">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320">
-        <path fill="#2ca4bf" fill-opacity="1" d="M0,256L24,250.7C48,245,96,235,144,224C192,213,240,203,288,176C336,149,384,107,432,90.7C480,75,528,85,576,101.3C624,117,672,139,720,149.3C768,160,816,160,864,138.7C912,117,960,75,1008,85.3C1056,96,1104,160,1152,192C1200,224,1248,224,1296,197.3C1344,171,1392,117,1416,90.7L1440,64L1440,320L1416,320C1392,320,1344,320,1296,320C1248,320,1200,320,1152,320C1104,320,1056,320,1008,320C960,320,912,320,864,320C816,320,768,320,720,320C672,320,624,320,576,320C528,320,480,320,432,320C384,320,336,320,288,320C240,320,192,320,144,320C96,320,48,320,24,320L0,320Z"></path>
+        <path fill="#2c3e50" fill-opacity="1" d="M0,256L24,250.7C48,245,96,235,144,224C192,213,240,203,288,176C336,149,384,107,432,90.7C480,75,528,85,576,101.3C624,117,672,139,720,149.3C768,160,816,160,864,138.7C912,117,960,75,1008,85.3C1056,96,1104,160,1152,192C1200,224,1248,224,1296,197.3C1344,171,1392,117,1416,90.7L1440,64L1440,320L1416,320C1392,320,1344,320,1296,320C1248,320,1200,320,1152,320C1104,320,1056,320,1008,320C960,320,912,320,864,320C816,320,768,320,720,320C672,320,624,320,576,320C528,320,480,320,432,320C384,320,336,320,288,320C240,320,192,320,144,320C96,320,48,320,24,320L0,320Z"></path>
       </svg>
     </div>
   </section>
@@ -564,13 +583,13 @@
   <!-- ===== TRAINING ===== -->
   <section id="training">
     <div class="container">
-      <div class="row text-center mb-5">
+      <div class="row text-center mb-4">
         <div class="col">
           <h2>Training & Sertifikasi</h2>
         </div>
       </div>
       <div class="row g-4 justify-content-center">
-        <div class="col-md-6 col-lg-3" data-aos="flip-left" data-aos-duration="600" data-aos-delay="100">
+        <div class="col-md-6 col-lg-3" data-aos="flip-left" data-aos-duration="500" data-aos-delay="80">
           <div class="training-card">
             <img src="asset/sertifikat/cpkb.jpg" class="card-img-top" alt="CPKB" />
             <div class="card-body">
@@ -578,7 +597,7 @@
             </div>
           </div>
         </div>
-        <div class="col-md-6 col-lg-3" data-aos="flip-left" data-aos-duration="600" data-aos-delay="150">
+        <div class="col-md-6 col-lg-3" data-aos="flip-left" data-aos-duration="500" data-aos-delay="130">
           <div class="training-card">
             <img src="asset/sertifikat/5r.jpg" class="card-img-top" alt="5R" />
             <div class="card-body">
@@ -586,7 +605,7 @@
             </div>
           </div>
         </div>
-        <div class="col-md-6 col-lg-3" data-aos="flip-left" data-aos-duration="600" data-aos-delay="200">
+        <div class="col-md-6 col-lg-3" data-aos="flip-left" data-aos-duration="500" data-aos-delay="180">
           <div class="training-card">
             <img src="asset/sertifikat/k3.jpg" class="card-img-top" alt="K3" />
             <div class="card-body">
@@ -594,7 +613,7 @@
             </div>
           </div>
         </div>
-        <div class="col-md-6 col-lg-3" data-aos="flip-left" data-aos-duration="600" data-aos-delay="250">
+        <div class="col-md-6 col-lg-3" data-aos="flip-left" data-aos-duration="500" data-aos-delay="230">
           <div class="training-card">
             <img src="asset/sertifikat/halal.jpg" class="card-img-top" alt="Halal" />
             <div class="card-body">
@@ -607,7 +626,7 @@
     <!-- Wave -->
     <div class="wave-spacer">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320">
-        <path fill="#f8fafc" fill-opacity="1" d="M0,288L0,288L96,288L96,160L192,160L192,0L288,0L288,64L384,64L384,160L480,160L480,128L576,128L576,160L672,160L672,224L768,224L768,64L864,64L864,32L960,32L960,192L1056,192L1056,224L1152,224L1152,96L1248,96L1248,64L1344,64L1344,32L1440,32L1440,320L1344,320L1344,320L1248,320L1248,320L1152,320L1152,320L1056,320L1056,320L960,320L960,320L864,320L864,320L768,320L768,320L672,320L672,320L576,320L576,320L480,320L480,320L384,320L384,320L288,320L288,320L192,320L192,320L96,320L96,320L0,320L0,320Z"></path>
+        <path fill="#f5f7fa" fill-opacity="1" d="M0,288L0,288L96,288L96,160L192,160L192,0L288,0L288,64L384,64L384,160L480,160L480,128L576,128L576,160L672,160L672,224L768,224L768,64L864,64L864,32L960,32L960,192L1056,192L1056,224L1152,224L1152,96L1248,96L1248,64L1344,64L1344,32L1440,32L1440,320L1344,320L1344,320L1248,320L1248,320L1152,320L1152,320L1056,320L1056,320L960,320L960,320L864,320L864,320L768,320L768,320L672,320L672,320L576,320L576,320L480,320L480,320L384,320L384,320L288,320L288,320L192,320L192,320L96,320L96,320L0,320L0,320Z"></path>
       </svg>
     </div>
   </section>
@@ -615,7 +634,7 @@
   <!-- ===== CONTACT ===== -->
   <section id="contact">
     <div class="container">
-      <div class="row text-center mb-5">
+      <div class="row text-center mb-4">
         <div class="col">
           <h2>Contact Me</h2>
         </div>
@@ -623,7 +642,7 @@
 
       <!-- Contact Info -->
       <div class="row g-3 justify-content-center mb-5">
-        <div class="col-md-6 col-lg-4" data-aos="fade-up" data-aos-delay="100">
+        <div class="col-md-6 col-lg-4" data-aos="fade-up" data-aos-delay="80">
           <div class="contact-item">
             <i class="bi bi-envelope-fill"></i>
             <div>
@@ -632,7 +651,7 @@
             </div>
           </div>
         </div>
-        <div class="col-md-6 col-lg-4" data-aos="fade-up" data-aos-delay="150">
+        <div class="col-md-6 col-lg-4" data-aos="fade-up" data-aos-delay="130">
           <div class="contact-item">
             <i class="bi bi-whatsapp"></i>
             <div>
@@ -641,7 +660,7 @@
             </div>
           </div>
         </div>
-        <div class="col-md-6 col-lg-4" data-aos="fade-up" data-aos-delay="200">
+        <div class="col-md-6 col-lg-4" data-aos="fade-up" data-aos-delay="180">
           <div class="contact-item">
             <i class="bi bi-geo-alt-fill"></i>
             <div>
@@ -686,21 +705,21 @@
     <!-- Wave -->
     <div class="wave-spacer">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320">
-        <path fill="#1e293b" fill-opacity="1" d="M0,160L48,133.3C96,107,192,53,288,58.7C384,64,480,128,576,160C672,192,768,192,864,197.3C960,203,1056,213,1152,192C1248,171,1344,117,1392,90.7L1440,64L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z"></path>
+        <path fill="#1e2a3a" fill-opacity="1" d="M0,160L48,133.3C96,107,192,53,288,58.7C384,64,480,128,576,160C672,192,768,192,864,197.3C960,203,1056,213,1152,192C1248,171,1344,117,1392,90.7L1440,64L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z"></path>
       </svg>
     </div>
   </section>
 
   <!-- ===== FOOTER ===== -->
   <footer class="text-center">
-    <p>Created with <i class="bi bi-heart-fill text-danger"></i> by <a href="#" target="_blank">Ragil Sapta</a> &copy; 2026</p>
+    <p>Created with <i class="bi bi-heart-fill" style="color: #b0c4d9;"></i> by <a href="#" target="_blank">Ragil Sapta</a> &copy; 2026</p>
   </footer>
 
   <!-- ===== SCRIPTS ===== -->
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
   <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
   <script>
-    AOS.init({ once: true, duration: 800 });
+    AOS.init({ once: true, duration: 700 });
   </script>
 
   <!-- Google Form Script -->
