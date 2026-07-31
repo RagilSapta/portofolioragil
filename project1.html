@@ -3,22 +3,315 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>portofolio ragil sapta</title>
+    <title>Project 001 — Ragil Sapta</title>
     <!-- css bootstrap -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous" />
     <!-- icon bootstrap -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" />
     <!-- aos -->
     <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
-    <!-- css internal -->
-    <link rel="stylesheet" href="style.css" />
+    <!-- fonts: sama dengan index.html -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=Inter:wght@300;400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+    <style>
+      /* =========================================================
+         TOKENS — sama persis dengan index.html agar senada
+         ========================================================= */
+      :root {
+        --paper: #F1F3EC;
+        --paper-card: #FFFFFF;
+        --ink: #1E2B24;
+        --ink-dark: #17211C;
+        --ink-soft: #56695D;
+        --line: #CBD5C7;
+        --line-dark: rgba(240, 245, 238, 0.16);
+        --accent: #3F6B52;
+        --accent-soft: #E4ECE3;
+        --rose: #B36B7A;
+        --stamp: #A3402F;
+        --radius: 10px;
+        --font-display: 'Fraunces', serif;
+        --font-body: 'Inter', sans-serif;
+        --font-mono: 'IBM Plex Mono', monospace;
+      }
+
+      * { margin: 0; padding: 0; box-sizing: border-box; }
+      html { scroll-behavior: smooth; }
+
+      body {
+        font-family: var(--font-body);
+        background-color: var(--paper);
+        color: var(--ink);
+        -webkit-font-smoothing: antialiased;
+        background-image: radial-gradient(var(--line) 1px, transparent 1px);
+        background-size: 26px 26px;
+      }
+
+      a { color: inherit; }
+      ::selection { background: var(--accent); color: #fff; }
+      :focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; border-radius: 3px; }
+
+      @media (prefers-reduced-motion: reduce) {
+        *, *::before, *::after { animation-duration: 0.001ms !important; transition-duration: 0.001ms !important; }
+      }
+
+      .eyebrow {
+        font-family: var(--font-mono);
+        font-size: 0.72rem;
+        letter-spacing: 0.16em;
+        text-transform: uppercase;
+        color: var(--accent);
+        display: flex;
+        align-items: center;
+        gap: 0.55rem;
+        margin-bottom: 0.9rem;
+        justify-content: center;
+      }
+      .eyebrow::before { content: ''; width: 26px; height: 1px; background: var(--accent); display: inline-block; }
+      .section-dark .eyebrow { color: #B9CDBE; }
+      .section-dark .eyebrow::before { background: #B9CDBE; }
+
+      .tear-line { height: 1px; background-image: repeating-linear-gradient(to right, var(--line) 0 10px, transparent 10px 20px); }
+      .tear-line.on-dark { background-image: repeating-linear-gradient(to right, var(--line-dark) 0 10px, transparent 10px 20px); }
+
+      /* ===== NAVBAR (identik dengan index.html) ===== */
+      .navbar {
+        background: var(--ink-dark) !important;
+        border-bottom: 1px solid var(--line-dark);
+        box-shadow: none;
+      }
+      .navbar-brand {
+        font-family: var(--font-mono);
+        font-weight: 500;
+        letter-spacing: 0.04em;
+        font-size: 1rem;
+        color: #F4F7F1 !important;
+        display: flex;
+        align-items: center;
+        gap: 0.55rem;
+        text-transform: uppercase;
+      }
+      .navbar-brand .status-dot {
+        width: 8px; height: 8px; border-radius: 50%;
+        background: var(--accent);
+        animation: pulse 2.8s ease-in-out infinite;
+      }
+      @keyframes pulse {
+        0%   { box-shadow: 0 0 0 0 rgba(63,107,82,0.55); }
+        70%  { box-shadow: 0 0 0 6px rgba(63,107,82,0); }
+        100% { box-shadow: 0 0 0 0 rgba(63,107,82,0); }
+      }
+      .nav-link {
+        font-family: var(--font-mono);
+        font-size: 0.78rem;
+        letter-spacing: 0.05em;
+        text-transform: uppercase;
+        padding: 0.5rem 0.9rem !important;
+        color: rgba(244, 247, 241, 0.72) !important;
+        position: relative;
+      }
+      .nav-link::after {
+        content: '';
+        position: absolute;
+        left: 0.9rem; right: 0.9rem; bottom: 0.3rem;
+        height: 1px;
+        background: var(--accent);
+        transform: scaleX(0);
+        transform-origin: left;
+        transition: transform 0.25s ease;
+      }
+      .nav-link:hover, .nav-link.active { color: #fff !important; background: transparent; }
+      .nav-link:hover::after, .nav-link.active::after { transform: scaleX(1); }
+
+      /* ===== HERO PROJECT ===== */
+      .project-hero {
+        background: var(--paper);
+        padding-top: 150px;
+        padding-bottom: 56px;
+        text-align: center;
+      }
+
+      .project-hero .pid-tag {
+        font-family: var(--font-mono);
+        font-size: 0.72rem;
+        letter-spacing: 0.1em;
+        background: var(--ink-dark);
+        color: #F1F3EC;
+        padding: 0.3rem 0.7rem;
+        border-radius: 4px;
+        display: inline-block;
+        margin-bottom: 1.2rem;
+      }
+
+      .project-thumb {
+        width: 230px;
+        border: 1px solid var(--line);
+        border-radius: 8px;
+        padding: 8px;
+        background: var(--paper-card);
+        margin: 0 auto 1.8rem;
+      }
+      .project-thumb img { width: 100%; border-radius: 4px; display: block; }
+
+      .project-hero h1 {
+        font-family: var(--font-display);
+        font-weight: 600;
+        font-size: 2.3rem;
+        letter-spacing: -0.01em;
+        color: var(--ink);
+        margin-bottom: 1.4rem;
+      }
+
+      .project-hero .lead {
+        max-width: 760px;
+        margin: 0 auto;
+        font-size: 1rem;
+        line-height: 1.85;
+        color: var(--ink);
+        text-align: left;
+        background: var(--paper-card);
+        border: 1px solid var(--line);
+        border-left: 3px solid var(--accent);
+        border-radius: 6px;
+        padding: 1.6rem 1.8rem;
+      }
+
+      .project-cta {
+        margin-top: 1.8rem;
+        font-family: var(--font-mono);
+        font-size: 0.85rem;
+      }
+      .link-arrow {
+        font-family: var(--font-mono);
+        font-size: 0.85rem;
+        font-weight: 500;
+        text-decoration: none;
+        color: var(--accent);
+        display: inline-flex;
+        align-items: center;
+        gap: 0.4rem;
+        border-bottom: 1px solid var(--accent);
+        transition: gap 0.2s ease;
+      }
+      .link-arrow:hover { gap: 0.6rem; }
+
+      .scroll-note {
+        margin-top: 1.6rem;
+        color: var(--ink-soft);
+        font-size: 0.92rem;
+      }
+
+      /* ===== TESTIMONI ===== */
+      .testi-section { padding-top: 72px; padding-bottom: 72px; }
+      .testi-section.section-dark { background-color: var(--ink-dark); color: #DCE6DF; }
+      .testi-section.section-light { background-color: var(--paper); }
+
+      .testi-photo {
+        width: 190px;
+        border: 1px solid var(--line);
+        border-radius: 8px;
+        padding: 6px;
+        background: var(--paper-card);
+        margin: 0 auto;
+      }
+      .section-dark .testi-photo { border-color: var(--line-dark); background: #1D2A22; }
+      .testi-photo img { width: 100%; border-radius: 5px; display: block; }
+
+      .testi-card {
+        border-left: 3px solid var(--accent);
+        background: rgba(255,255,255,0.03);
+        padding: 1.6rem 1.8rem;
+        height: 100%;
+      }
+      .section-light .testi-card { background: var(--paper-card); border: 1px solid var(--line); border-left: 3px solid var(--accent); }
+
+      .testi-card h3 {
+        font-family: var(--font-display);
+        font-weight: 600;
+        font-size: 1.3rem;
+        margin-bottom: 0.2rem;
+      }
+      .section-dark .testi-card h3 { color: #F4F7F1; }
+      .section-light .testi-card h3 { color: var(--ink); }
+
+      .testi-card .role {
+        font-family: var(--font-mono);
+        font-size: 0.72rem;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+        margin-bottom: 0.9rem;
+        display: block;
+      }
+      .section-dark .testi-card .role { color: #9FB6A6; }
+      .section-light .testi-card .role { color: var(--ink-soft); }
+
+      .ig-link {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.4rem;
+        font-family: var(--font-mono);
+        font-size: 0.78rem;
+        text-decoration: none;
+        margin-bottom: 1rem;
+      }
+      .section-dark .ig-link { color: #DCE6DF; }
+      .section-light .ig-link { color: var(--ink); }
+      .ig-link i { color: var(--rose); }
+
+      .testi-card p.quote {
+        font-size: 0.96rem;
+        line-height: 1.75;
+        font-weight: 300;
+        margin: 0;
+        position: relative;
+        padding-left: 1.1rem;
+      }
+      .section-dark .testi-card p.quote { color: #D7E1D9; }
+      .section-light .testi-card p.quote { color: var(--ink); }
+      .testi-card p.quote::before {
+        content: '"';
+        font-family: var(--font-display);
+        font-size: 2.2rem;
+        line-height: 0;
+        color: var(--accent);
+        position: absolute;
+        left: -0.35rem;
+        top: 0.55rem;
+      }
+
+      /* ===== FOOTER ===== */
+      footer {
+        background: var(--ink-dark) !important;
+        padding: 1.6rem 0;
+        border-top: 1px solid var(--line-dark);
+      }
+      footer p {
+        font-family: var(--font-mono);
+        font-size: 0.78rem;
+        color: #9FB0A5 !important;
+        text-align: center;
+        margin: 0;
+      }
+      footer a { color: #B9CDBE !important; font-weight: 600; text-decoration: none; }
+      footer a:hover { color: #fff !important; }
+
+      /* ===== RESPONSIVE ===== */
+      @media (max-width: 768px) {
+        .project-hero { padding-top: 110px; }
+        .project-hero h1 { font-size: 1.7rem; }
+        .project-hero .lead { text-align: left; padding: 1.2rem 1.3rem; }
+        .testi-section { padding-top: 52px; padding-bottom: 52px; }
+        .testi-photo { margin-bottom: 1.4rem; }
+      }
+    </style>
   </head>
   <body id="">
     <!-- navbar -->
-    <nav class="navbar navbar-expand-lg navbar-dark shadow-sm fixed-top" style="background-color: #2ca4bf">
+    <nav class="navbar navbar-expand-lg navbar-dark fixed-top">
       <div class="container">
-        <a class="navbar-brand" href="index.html">RAGIL_SAPTA</a>
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <a class="navbar-brand" href="index.html"><span class="status-dot"></span>Ragil · Sapta</a>
+        <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="navbarNav">
@@ -41,254 +334,168 @@
     </nav>
     <!-- akhir navbar -->
 
-    <!-- jumbo tron -->
-    <section id="project1" class="jumbotron text-center" style="padding-top: 65px; background-color: #bfbfbf">
-      <h2>My Project 001</h2>
-      <img src="asset/project1/RESUMEPO1.jpg" alt="resumePo" width="250" class="shadow-lg" />
-      <h1 class="display-4">Produksi Data All in one</h1>
-      <p class="lead">
-        Latar belakang saya membuat project ini berawal dari keluh kesah teman-teman produksi terkait transparansi data hasil produksi dan kesiapan dari masing-masing divisi untuk melakukan proses produksi, selama beberapa tahun (dari awal
-        mula pabrik berdiri) seluruh team divisi produksi menggunakan excel offline untuk mengolah data hasil produksi, yang bila mana ada selisih jumlah atau data mereka harus konfirmasi secara langsung dan mengalami kesulitan untuk
-        sinkronisasi data. <br />
-        Begitu pula dengan perencanaan produksi, kepala produksi kerap kebingungan ketika ingin menjadwalkan produk apa saja yang bisa diproduksi. <br />
-        Karena perusahaan cabang ini tidak memiliki Team Support IT, untuk kemudahan dan proses pengolahan data yang lebih sederhana dan lebih transparansi saya membuat project ini agar teman-teman produksi dan kepala produksi mudah dalam
-        mengakses data, konfirmasi data, sinkronisasi data, dan kemudahan kepala produksi dalam menjadwalkan produk apa saja yang harus diproduksi oleh karyawan.
-      </p>
+    <!-- hero project -->
+    <section id="project1" class="project-hero">
+      <div class="container" data-aos="fade-up" data-aos-duration="600">
+        <span class="pid-tag">PRJ.01 — My Project 001</span>
+        <div class="project-thumb">
+          <img src="asset/project1/RESUMEPO1.jpg" alt="resumePo" />
+        </div>
+        <h1>Produksi Data All in One</h1>
+        <p class="lead">
+          Latar belakang saya membuat project ini berawal dari keluh kesah teman-teman produksi terkait transparansi data hasil produksi dan kesiapan dari masing-masing divisi untuk melakukan proses produksi, selama beberapa tahun (dari awal
+          mula pabrik berdiri) seluruh team divisi produksi menggunakan excel offline untuk mengolah data hasil produksi, yang bila mana ada selisih jumlah atau data mereka harus konfirmasi secara langsung dan mengalami kesulitan untuk
+          sinkronisasi data. <br /><br />
+          Begitu pula dengan perencanaan produksi, kepala produksi kerap kebingungan ketika ingin menjadwalkan produk apa saja yang bisa diproduksi. <br /><br />
+          Karena perusahaan cabang ini tidak memiliki Team Support IT, untuk kemudahan dan proses pengolahan data yang lebih sederhana dan lebih transparansi saya membuat project ini agar teman-teman produksi dan kepala produksi mudah dalam
+          mengakses data, konfirmasi data, sinkronisasi data, dan kemudahan kepala produksi dalam menjadwalkan produk apa saja yang harus diproduksi oleh karyawan.
+        </p>
 
-     
-      <div style="font-weight: bolder; padding-bottom: 30px;" >
-        <a href="" >Lihat contoh project</a> <br>
+        <div class="project-cta">
+          <a href="" class="link-arrow">Lihat contoh project →</a>
+        </div>
+        <p class="scroll-note">Geser ke bawah untuk melihat pesan user terkait project ini</p>
       </div>
-        <p class="lead">Geser ke bawa untuk melihat pesan user terkait project ini</p>
-
-      
-
-      
-      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320">
-        <path
-          fill="#2ca4bf"
-          fill-opacity="1"
-          d="M0,256L24,250.7C48,245,96,235,144,224C192,213,240,203,288,176C336,149,384,107,432,90.7C480,75,528,85,576,101.3C624,117,672,139,720,149.3C768,160,816,160,864,138.7C912,117,960,75,1008,85.3C1056,96,1104,160,1152,192C1200,224,1248,224,1296,197.3C1344,171,1392,117,1416,90.7L1440,64L1440,320L1416,320C1392,320,1344,320,1296,320C1248,320,1200,320,1152,320C1104,320,1056,320,1008,320C960,320,912,320,864,320C816,320,768,320,720,320C672,320,624,320,576,320C528,320,480,320,432,320C384,320,336,320,288,320C240,320,192,320,144,320C96,320,48,320,24,320L0,320Z"
-        ></path>
-      </svg>
     </section>
-    <!-- akhir jumbo tron -->
+    <!-- akhir hero project -->
 
-  <!-- apa kata orang tentang projek ini -->
-     <!-- beni -->
-    <section id="" style="background-color: #2ca4bf; padding-top: 65px">
+    <div class="tear-line"></div>
+
+    <!-- apa kata orang tentang projek ini -->
+    <!-- beni -->
+    <section class="testi-section section-dark">
       <div class="container" data-aos-duration="1500">
-        <div class="row text-center mb-3">
-          <div class="col" style="color: white">
-            <h2>Apa pesan user terkait project ini</h2>
-          </div>
+        <div class="section-head text-center mb-4">
+          <span class="eyebrow">Testimoni</span>
         </div>
-        <div class="row justify-content-center fs-5 text-center">
-          <div class="col-md-4" style="color: white" data-aos="fade-right" data-aos-offset="250">
-            <img src="asset/orang/beni.jpg" alt="" width="250" style="border-radius: 5%;" class="shadow-lg"/>
+        <div class="row justify-content-center align-items-center g-4">
+          <div class="col-md-4" data-aos="fade-right" data-aos-offset="250">
+            <div class="testi-photo"><img src="asset/orang/beni.jpg" alt="" /></div>
           </div>
-          <div class="col-md-4" style="color: white" data-aos="fade-left" data-aos-offset="250" data-aos-delay="200">
-            <ul class="mt-3" style=" justify-content: start; text-decoration: none">
-              <div><h3>Benny Indra</h3></div>
-              <div><h4>Manager oprasional dan PPIC</h4></div>
-              <div style="display: flex; justify-content: center;">
-                <div>
-                  <a href="https://www.instagram.com/bennyindrac?igsh=YzljYTk1ODg3Zg=="><i class="bi bi-instagram" style="color: red;padding-right: 8px;"></i></a>
-                </div>
-                <div>
-                  <a href="https://www.instagram.com/bennyindrac?igsh=YzljYTk1ODg3Zg==" class="text-white fw-bold">@bennyindrac</a></p>
-                </div>
-              </div>
-            </ul>
-            <p>
-              Luar biasa, saya merasakan dampak positif dari projek yang mas Ragil buat ini, Terimakasih, saya jadi lebih mudah kontrol proses produksi dan cek road map proses produksi
-            </p>
+          <div class="col-md-5" data-aos="fade-left" data-aos-offset="250" data-aos-delay="200">
+            <div class="testi-card">
+              <h3>Benny Indra</h3>
+              <span class="role">Manager Operasional dan PPIC</span>
+              <a href="https://www.instagram.com/bennyindrac?igsh=YzljYTk1ODg3Zg==" class="ig-link">
+                <i class="bi bi-instagram"></i> @bennyindrac
+              </a>
+              <p class="quote">
+                Luar biasa, saya merasakan dampak positif dari projek yang mas Ragil buat ini, Terimakasih, saya jadi lebih mudah kontrol proses produksi dan cek road map proses produksi
+              </p>
+            </div>
           </div>
         </div>
       </div>
-      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320">
-        <path
-          fill="#bfbfbf"
-          fill-opacity="1"
-          d="M0,288L0,288L96,288L96,160L192,160L192,0L288,0L288,64L384,64L384,160L480,160L480,128L576,128L576,160L672,160L672,224L768,224L768,64L864,64L864,32L960,32L960,192L1056,192L1056,224L1152,224L1152,96L1248,96L1248,64L1344,64L1344,32L1440,32L1440,320L1344,320L1344,320L1248,320L1248,320L1152,320L1152,320L1056,320L1056,320L960,320L960,320L864,320L864,320L768,320L768,320L672,320L672,320L576,320L576,320L480,320L480,320L384,320L384,320L288,320L288,320L192,320L192,320L96,320L96,320L0,320L0,320Z"
-        ></path>
-      </svg>
     </section>
     <!-- beni -->
 
-
+    <div class="tear-line on-dark"></div>
 
     <!-- gopay -->
-    <section id="" style="background-color: #bfbfbf; padding-top: 65px">
+    <section class="testi-section section-light">
       <div class="container" data-aos-duration="1500">
-        <div class="row text-center mb-3">
-          
-        </div>
-        <div class="row justify-content-center fs-5 text-center">
-          <div class="col-md-4" style="color:black" data-aos="fade-right" data-aos-offset="250">
-            <img src="asset/orang/gopay.jpg" alt="" width="250" style="border-radius: 5%;" class="shadow-lg"/>
+        <div class="row justify-content-center align-items-center g-4">
+          <div class="col-md-4" data-aos="fade-right" data-aos-offset="250">
+            <div class="testi-photo"><img src="asset/orang/gopay.jpg" alt="" /></div>
           </div>
-          <div class="col-md-4" style="color: black" data-aos="fade-left" data-aos-offset="250" data-aos-delay="200">
-            <ul class="mt-3" style=" justify-content: start; text-decoration: none">
-              <div><h3>Goviansyah</h3></div>
-              <div><h4>Kepala bagian filling</h4></div>
-              <div style="display: flex; justify-content: center;">
-                <div>
-                  <a href="https://www.instagram.com/goviansyah2?igsh=YzljYTk1ODg3Zg=="><i class="bi bi-instagram" style="color: red;padding-right: 8px;"></i></a>
-                </div>
-                <div>
-                  <a href="https://www.instagram.com/goviansyah2?igsh=YzljYTk1ODg3Zg==" class="text-black fw-bold">@goviansyah</a></p>
-                </div>
-              </div>
-            </ul>
-            <p>
-              Memudahkan kami saat ada keperluan telusur data, jika ada kesalahan dalam input nama prodak/item langsung terdeteksi, meminimalisir kesalahan saat input data, bila memang terjadi kesalahan dalam input angka hasil produksi bisa dengan cepat dan mudah untuk memperbaiki, disamping itu kami dapat mengetahui berapa hasil yg kami kerjakan dan berapa kekuranya.
-            </p>
+          <div class="col-md-5" data-aos="fade-left" data-aos-offset="250" data-aos-delay="200">
+            <div class="testi-card">
+              <h3>Goviansyah</h3>
+              <span class="role">Kepala Bagian Filling</span>
+              <a href="https://www.instagram.com/goviansyah2?igsh=YzljYTk1ODg3Zg==" class="ig-link">
+                <i class="bi bi-instagram"></i> @goviansyah
+              </a>
+              <p class="quote">
+                Memudahkan kami saat ada keperluan telusur data, jika ada kesalahan dalam input nama prodak/item langsung terdeteksi, meminimalisir kesalahan saat input data, bila memang terjadi kesalahan dalam input angka hasil produksi bisa dengan cepat dan mudah untuk memperbaiki, disamping itu kami dapat mengetahui berapa hasil yg kami kerjakan dan berapa kekuranya.
+              </p>
+            </div>
           </div>
         </div>
       </div>
-      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320">
-        <path
-          fill="#2ca4bf"
-          fill-opacity="1"
-          d="M0,256L24,250.7C48,245,96,235,144,224C192,213,240,203,288,176C336,149,384,107,432,90.7C480,75,528,85,576,101.3C624,117,672,139,720,149.3C768,160,816,160,864,138.7C912,117,960,75,1008,85.3C1056,96,1104,160,1152,192C1200,224,1248,224,1296,197.3C1344,171,1392,117,1416,90.7L1440,64L1440,320L1416,320C1392,320,1344,320,1296,320C1248,320,1200,320,1152,320C1104,320,1056,320,1008,320C960,320,912,320,864,320C816,320,768,320,720,320C672,320,624,320,576,320C528,320,480,320,432,320C384,320,336,320,288,320C240,320,192,320,144,320C96,320,48,320,24,320L0,320Z"
-        ></path>
-      </svg>
     </section>
     <!-- gopay -->
 
+    <div class="tear-line"></div>
+
     <!-- dian -->
-    <section id="" style="background-color: #2ca4bf; padding-top: 65px">
+    <section class="testi-section section-dark">
       <div class="container" data-aos-duration="1500">
-        <div class="row text-center mb-3">
-          <div class="col" style="color: white">
-           
+        <div class="row justify-content-center align-items-center g-4">
+          <div class="col-md-4" data-aos="fade-right" data-aos-offset="250">
+            <div class="testi-photo"><img src="asset/orang/dian.jpg" alt="" /></div>
           </div>
-        </div>
-        <div class="row justify-content-center fs-5 text-center">
-          <div class="col-md-4" style="color: white" data-aos="fade-right" data-aos-offset="250">
-            <img src="asset/orang/dian.jpg" alt="" width="250" style="border-radius: 5%;" class="shadow-lg"/>
-          </div>
-          <div class="col-md-4" style="color: white" data-aos="fade-left" data-aos-offset="250" data-aos-delay="200">
-            <ul class="mt-3" style=" justify-content: start; text-decoration: none">
-              <div><h3>Dian isnandar</h3></div>
-              <div><h4>Kapten filling</h4></div>
-              <div style="display: flex; justify-content: center;">
-                <div>
-                  <a href="https://www.instagram.com/dian.iz?igsh=YzljYTk1ODg3Zg=="><i class="bi bi-instagram" style="color: red;padding-right: 8px;"></i></a>
-                </div>
-                <div>
-                  <a href="https://www.instagram.com/dian.iz?igsh=YzljYTk1ODg3Zg==" class="text-white fw-bold">@dian.iz</a></p>
-                </div>
-              </div>
-            </ul>
-            <p>
-              Dulu sering pulang telat karna sulit ngumpulin data untuk laporan, sekarang bisa teng go ketika bel pulang bunyi, karna ada program input data ini.
-            </p>
+          <div class="col-md-5" data-aos="fade-left" data-aos-offset="250" data-aos-delay="200">
+            <div class="testi-card">
+              <h3>Dian Isnandar</h3>
+              <span class="role">Kapten Filling</span>
+              <a href="https://www.instagram.com/dian.iz?igsh=YzljYTk1ODg3Zg==" class="ig-link">
+                <i class="bi bi-instagram"></i> @dian.iz
+              </a>
+              <p class="quote">
+                Dulu sering pulang telat karna sulit ngumpulin data untuk laporan, sekarang bisa teng go ketika bel pulang bunyi, karna ada program input data ini.
+              </p>
+            </div>
           </div>
         </div>
       </div>
-      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320">
-        <path
-          fill="#bfbfbf"
-          fill-opacity="1"
-          d="M0,288L0,288L96,288L96,160L192,160L192,0L288,0L288,64L384,64L384,160L480,160L480,128L576,128L576,160L672,160L672,224L768,224L768,64L864,64L864,32L960,32L960,192L1056,192L1056,224L1152,224L1152,96L1248,96L1248,64L1344,64L1344,32L1440,32L1440,320L1344,320L1344,320L1248,320L1248,320L1152,320L1152,320L1056,320L1056,320L960,320L960,320L864,320L864,320L768,320L768,320L672,320L672,320L576,320L576,320L480,320L480,320L384,320L384,320L288,320L288,320L192,320L192,320L96,320L96,320L0,320L0,320Z"
-        ></path>
-      </svg>
     </section>
     <!-- dian -->
 
+    <div class="tear-line on-dark"></div>
 
     <!-- medol -->
-    <section id="" style="background-color: #bfbfbf; padding-top: 65px">
+    <section class="testi-section section-light">
       <div class="container" data-aos-duration="1500">
-        <div class="row text-center mb-3">
-          
-        </div>
-        <div class="row justify-content-center fs-5 text-center">
-          <div class="col-md-4" style="color: black" data-aos="fade-right" data-aos-offset="250">
-            <img src="asset/orang/medol.jpg" alt="" width="250" style="border-radius: 5%;" class="shadow-lg"/>
+        <div class="row justify-content-center align-items-center g-4">
+          <div class="col-md-4" data-aos="fade-right" data-aos-offset="250">
+            <div class="testi-photo"><img src="asset/orang/medol.jpg" alt="" /></div>
           </div>
-          <div class="col-md-4" style="color: black" data-aos="fade-left" data-aos-offset="250" data-aos-delay="200">
-            <ul class="mt-3" style=" justify-content: start; text-decoration: none">
-              <div><h3>Rizka Meida</h3></div>
-              <div><h4>Head of weighing</h4></div>
-              <div style="display: flex; justify-content: center;">
-                <div>
-                  <a href="https://www.instagram.com/goviansyah2?igsh=YzljYTk1ODg3Zg=="><i class="bi bi-instagram" style="color: red;padding-right: 8px;"></i></a>
-                </div>
-                <div>
-                  <a href="https://www.instagram.com/goviansyah2?igsh=YzljYTk1ODg3Zg==" class="text-black fw-bold">@rizkameidan</a></p>
-                </div>
-              </div>
-            </ul>
-            <p>
-              Jadi bisa cek hasil kerja dan bisa lihat stok bahan baku yang sudah ditimbang, mantaaaaap bapak Ragil..
-            </p>
+          <div class="col-md-5" data-aos="fade-left" data-aos-offset="250" data-aos-delay="200">
+            <div class="testi-card">
+              <h3>Rizka Meida</h3>
+              <span class="role">Head of Weighing</span>
+              <a href="https://www.instagram.com/goviansyah2?igsh=YzljYTk1ODg3Zg==" class="ig-link">
+                <i class="bi bi-instagram"></i> @rizkameidan
+              </a>
+              <p class="quote">
+                Jadi bisa cek hasil kerja dan bisa lihat stok bahan baku yang sudah ditimbang, mantaaaaap bapak Ragil..
+              </p>
+            </div>
           </div>
         </div>
       </div>
-      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320">
-        <path
-          fill="#2ca4bf"
-          fill-opacity="1"
-          d="M0,256L24,250.7C48,245,96,235,144,224C192,213,240,203,288,176C336,149,384,107,432,90.7C480,75,528,85,576,101.3C624,117,672,139,720,149.3C768,160,816,160,864,138.7C912,117,960,75,1008,85.3C1056,96,1104,160,1152,192C1200,224,1248,224,1296,197.3C1344,171,1392,117,1416,90.7L1440,64L1440,320L1416,320C1392,320,1344,320,1296,320C1248,320,1200,320,1152,320C1104,320,1056,320,1008,320C960,320,912,320,864,320C816,320,768,320,720,320C672,320,624,320,576,320C528,320,480,320,432,320C384,320,336,320,288,320C240,320,192,320,144,320C96,320,48,320,24,320L0,320Z"
-        ></path>
-      </svg>
     </section>
     <!-- medol -->
 
+    <div class="tear-line"></div>
+
     <!-- andri -->
-    <section id="" style="background-color: #2ca4bf; padding-top: 65px">
+    <section class="testi-section section-dark">
       <div class="container" data-aos-duration="1500">
-        <div class="row text-center mb-3">
-          <div class="col" style="color: white">
-           
+        <div class="row justify-content-center align-items-center g-4">
+          <div class="col-md-4" data-aos="fade-right" data-aos-offset="250">
+            <div class="testi-photo"><img src="asset/orang/andri.jpg" alt="" /></div>
           </div>
-        </div>
-        <div class="row justify-content-center fs-5 text-center">
-          <div class="col-md-4" style="color: white" data-aos="fade-right" data-aos-offset="250">
-            <img src="asset/orang/andri.jpg" alt="" width="250" style="border-radius: 5%;" class="shadow-lg"/>
-          </div>
-          <div class="col-md-4" style="color: white" data-aos="fade-left" data-aos-offset="250" data-aos-delay="200">
-            <ul class="mt-3" style=" justify-content: start; text-decoration: none">
-              <div><h3>Andri Bastian</h3></div>
-              <div><h4>Kepala bagian pengemasan</h4></div>
-              <div style="display: flex; justify-content: center;">
-                <div>
-                  <a href="https://www.instagram.com/dian.iz?igsh=YzljYTk1ODg3Zg=="><i class="bi bi-instagram" style="color: red;padding-right: 8px;"></i></a>
-                </div>
-                <div>
-                  <a href="https://www.instagram.com/dian.iz?igsh=YzljYTk1ODg3Zg==" class="text-white fw-bold">@dian.iz</a></p>
-                </div>
-              </div>
-            </ul>
-            <p>
-              Thkyu gil, bisa buat koreksi catatan manual gw
-            </p>
+          <div class="col-md-5" data-aos="fade-left" data-aos-offset="250" data-aos-delay="200">
+            <div class="testi-card">
+              <h3>Andri Bastian</h3>
+              <span class="role">Kepala Bagian Pengemasan</span>
+              <a href="https://www.instagram.com/dian.iz?igsh=YzljYTk1ODg3Zg==" class="ig-link">
+                <i class="bi bi-instagram"></i> @dian.iz
+              </a>
+              <p class="quote">
+                Thkyu gil, bisa buat koreksi catatan manual gw
+              </p>
+            </div>
           </div>
         </div>
       </div>
-      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320">
-        <path
-          fill="#bfbfbf"
-          fill-opacity="1"
-          d="M0,288L0,288L96,288L96,160L192,160L192,0L288,0L288,64L384,64L384,160L480,160L480,128L576,128L576,160L672,160L672,224L768,224L768,64L864,64L864,32L960,32L960,192L1056,192L1056,224L1152,224L1152,96L1248,96L1248,64L1344,64L1344,32L1440,32L1440,320L1344,320L1344,320L1248,320L1248,320L1152,320L1152,320L1056,320L1056,320L960,320L960,320L864,320L864,320L768,320L768,320L672,320L672,320L576,320L576,320L480,320L480,320L384,320L384,320L288,320L288,320L192,320L192,320L96,320L96,320L0,320L0,320Z"
-        ></path>
-      </svg>
     </section>
     <!-- andri -->
-
-
-
-
-
-
-    
 
     <!-- footer -->
-    <footer class="text-white text-center pb-5" style="background-color: #bfbfbf">
-      <p style="color: black">Created with <i class="bi bi-heart-fill text-danger"></i> by <a href="intaagram" class="text-black fw-bold">ragil sapta</a></p>
+    <footer class="text-center">
+      <p>Created with <i class="bi bi-heart-fill" style="color: var(--rose);"></i> by <a href="intaagram">ragil sapta</a></p>
     </footer>
     <!-- akhir footer -->
 
@@ -300,38 +507,37 @@
     <script>
       AOS.init({
         once: true,
+        duration: 600,
+        easing: 'ease-out',
       });
     </script>
 
-    <!-- google form -->
+    <!-- google form (dipertahankan sesuai file asli; halaman ini tidak memiliki form sehingga blok ini idle) -->
     <script>
       const scriptURL = "https://script.google.com/macros/s/AKfycbxoJOiMONKQoWAzWefk4MSfuC8BuiGIML57MgV8r4mU1Or3Y0dIld9HZIsgJqu4vrjbYg/exec";
 
       const form = document.forms["submit-to-google-sheet"];
-      const btnKirim = document.querySelector(".btn-kirim");
-      const btnLoading = document.querySelector(".btn-loading");
-      const myAlert = document.querySelector(".my-alert");
+      if (form) {
+        const btnKirim = document.querySelector(".btn-kirim");
+        const btnLoading = document.querySelector(".btn-loading");
+        const myAlert = document.querySelector(".my-alert");
 
-      form.addEventListener("submit", (e) => {
-        e.preventDefault();
-        // ketika tombol submit diklik
-        // tampilkan tombol loading, hilangkan tombol kirim
-        btnLoading.classList.toggle("d-none");
-        btnKirim.classList.toggle("d-none");
+        form.addEventListener("submit", (e) => {
+          e.preventDefault();
+          btnLoading.classList.toggle("d-none");
+          btnKirim.classList.toggle("d-none");
 
-        fetch(scriptURL, { method: "POST", body: new FormData(form) })
-          .then((response) => {
-            // tampilkan tombol kirim, hilangkan tombol loading
-            btnLoading.classList.toggle("d-none");
-            btnKirim.classList.toggle("d-none");
-            // tampilkan allert
-            myAlert.classList.toggle("d-none");
-            // reset formnya
-            form.reset();
-            console.log("Success!", response);
-          })
-          .catch((error) => console.error("Error!", error.message));
-      });
+          fetch(scriptURL, { method: "POST", body: new FormData(form) })
+            .then((response) => {
+              btnLoading.classList.toggle("d-none");
+              btnKirim.classList.toggle("d-none");
+              myAlert.classList.toggle("d-none");
+              form.reset();
+              console.log("Success!", response);
+            })
+            .catch((error) => console.error("Error!", error.message));
+        });
+      }
     </script>
   </body>
 </html>
