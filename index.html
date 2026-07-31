@@ -4,443 +4,565 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Ragil Sapta — Portfolio</title>
-  <!-- Bootstrap 5 -->
+  <!-- Bootstrap 5 (grid + form utilities only, visuals fully overridden below) -->
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" />
   <!-- Bootstrap Icons -->
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" />
   <!-- AOS -->
   <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
-  <!-- Google Font: Inter -->
+  <!-- Fonts: Fraunces (display), Inter (body), IBM Plex Mono (data / labels) -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,500;14..32,600;14..32,700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=Inter:wght@300;400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
   <style>
-    /* ===== RESET ===== */
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
+    /* =========================================================
+       TOKENS — Lab / QC record aesthetic
+       Palette drawn from cosmetics-lab QC world: sage paper,
+       ink-green record covers, stamp-red approval ink.
+       ========================================================= */
+    :root {
+      --paper: #F1F3EC;
+      --paper-card: #FFFFFF;
+      --ink: #1E2B24;
+      --ink-dark: #17211C;
+      --ink-soft: #56695D;
+      --line: #CBD5C7;
+      --line-dark: rgba(240, 245, 238, 0.16);
+      --accent: #3F6B52;
+      --accent-soft: #E4ECE3;
+      --rose: #B36B7A;
+      --stamp: #A3402F;
+      --radius: 10px;
+      --font-display: 'Fraunces', serif;
+      --font-body: 'Inter', sans-serif;
+      --font-mono: 'IBM Plex Mono', monospace;
     }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    html { scroll-behavior: smooth; }
 
     body {
-      font-family: 'Inter', sans-serif;
-      background-color: #f5f7fa;
-      color: #1e2a3a;
-      scroll-behavior: smooth;
+      font-family: var(--font-body);
+      background-color: var(--paper);
+      color: var(--ink);
       -webkit-font-smoothing: antialiased;
+      background-image: radial-gradient(var(--line) 1px, transparent 1px);
+      background-size: 26px 26px;
     }
 
-    section {
-      padding-top: 80px;
-      padding-bottom: 40px;
+    section { padding-top: 96px; padding-bottom: 64px; }
+
+    a { color: inherit; }
+
+    ::selection { background: var(--accent); color: #fff; }
+
+    :focus-visible {
+      outline: 2px solid var(--accent);
+      outline-offset: 3px;
+      border-radius: 3px;
     }
 
-    /* ===== TYPOGRAPHY ===== */
-    h2 {
-      font-weight: 700;
-      letter-spacing: -0.02em;
-      position: relative;
-      display: inline-block;
-      margin-bottom: 1.8rem;
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after { animation-duration: 0.001ms !important; transition-duration: 0.001ms !important; }
     }
 
-    h2:after {
+    /* ===== Shared structural devices ===== */
+    .eyebrow {
+      font-family: var(--font-mono);
+      font-size: 0.72rem;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: var(--accent);
+      display: flex;
+      align-items: center;
+      gap: 0.55rem;
+      margin-bottom: 0.9rem;
+    }
+
+    .eyebrow::before {
       content: '';
-      position: absolute;
-      bottom: -10px;
-      left: 50%;
-      transform: translateX(-50%);
-      width: 56px;
-      height: 3px;
-      background: #7c8ea0;
-      border-radius: 4px;
+      width: 26px;
+      height: 1px;
+      background: var(--accent);
+      display: inline-block;
     }
 
-    .section-light h2:after {
-      background: #7c8ea0;
+    .section-dark .eyebrow { color: #B9CDBE; }
+    .section-dark .eyebrow::before { background: #B9CDBE; }
+
+    h2 {
+      font-family: var(--font-display);
+      font-weight: 600;
+      font-size: 2.1rem;
+      letter-spacing: -0.01em;
+      color: var(--ink);
+      margin-bottom: 2.2rem;
     }
 
-    .section-dark h2:after {
-      background: #c0c8d2;
+    .section-dark h2 { color: #F4F7F1; }
+
+    .section-head { margin-bottom: 2.6rem; }
+
+    /* Perforated divider between sections, replaces the wave-blob decoration */
+    .tear-line {
+      height: 1px;
+      background-image: repeating-linear-gradient(to right, var(--line) 0 10px, transparent 10px 20px);
     }
+    .tear-line.on-dark {
+      background-image: repeating-linear-gradient(to right, var(--line-dark) 0 10px, transparent 10px 20px);
+    }
+
+    /* ===== Reusable circular "approved" stamp signature ===== */
+    .stamp-badge { display: block; filter: drop-shadow(0 1px 1px rgba(0,0,0,0.08)); }
+    .stamp-badge text {
+      font-family: var(--font-mono);
+      fill: var(--stamp);
+    }
+    .stamp-badge .stamp-ring { stroke: var(--stamp); }
+    .stamp-badge .stamp-core { fill: none; stroke: var(--stamp); }
+    .stamp-badge .stamp-check { stroke: var(--stamp); }
 
     /* ===== NAVBAR ===== */
     .navbar {
-      background: rgba(44, 62, 80, 0.92) !important;
-      backdrop-filter: blur(12px);
-      box-shadow: 0 2px 24px rgba(0, 0, 0, 0.06);
-      transition: all 0.3s ease;
+      background: var(--ink-dark) !important;
+      border-bottom: 1px solid var(--line-dark);
+      box-shadow: none;
     }
 
     .navbar-brand {
-      font-weight: 700;
-      letter-spacing: -0.3px;
-      font-size: 1.35rem;
-      color: #ffffff !important;
+      font-family: var(--font-mono);
+      font-weight: 500;
+      letter-spacing: 0.04em;
+      font-size: 1rem;
+      color: #F4F7F1 !important;
+      display: flex;
+      align-items: center;
+      gap: 0.55rem;
+      text-transform: uppercase;
     }
 
-    .navbar-brand span {
-      color: #b0c4d9;
+    .navbar-brand .status-dot {
+      width: 8px; height: 8px; border-radius: 50%;
+      background: var(--accent);
+      box-shadow: 0 0 0 0 rgba(63,107,82,0.6);
+      animation: pulse 2.8s ease-in-out infinite;
+    }
+
+    @keyframes pulse {
+      0%   { box-shadow: 0 0 0 0 rgba(63,107,82,0.55); }
+      70%  { box-shadow: 0 0 0 6px rgba(63,107,82,0); }
+      100% { box-shadow: 0 0 0 0 rgba(63,107,82,0); }
     }
 
     .nav-link {
-      font-weight: 500;
-      padding: 0.5rem 1.1rem !important;
-      border-radius: 40px;
-      transition: all 0.3s ease;
-      color: rgba(255, 255, 255, 0.8) !important;
-      font-size: 0.95rem;
+      font-family: var(--font-mono);
+      font-size: 0.78rem;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      padding: 0.5rem 0.9rem !important;
+      color: rgba(244, 247, 241, 0.72) !important;
+      position: relative;
+      border-radius: 0;
     }
 
-    .nav-link:hover,
-    .nav-link.active {
-      background: rgba(255, 255, 255, 0.12);
-      color: #ffffff !important;
+    .nav-link::after {
+      content: '';
+      position: absolute;
+      left: 0.9rem; right: 0.9rem; bottom: 0.3rem;
+      height: 1px;
+      background: var(--accent);
+      transform: scaleX(0);
+      transform-origin: left;
+      transition: transform 0.25s ease;
     }
+
+    .nav-link:hover, .nav-link.active { color: #fff !important; background: transparent; }
+    .nav-link:hover::after, .nav-link.active::after { transform: scaleX(1); }
 
     /* ===== HERO ===== */
     .hero {
-      background: linear-gradient(160deg, #eef2f7 0%, #dce3ec 100%);
-      padding-top: 120px;
+      background: var(--paper);
+      padding-top: 130px;
       padding-bottom: 30px;
+    }
+
+    .id-card {
+      background: var(--paper-card);
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      padding: 1rem;
+      position: relative;
+      max-width: 320px;
+      margin: 0 auto;
+    }
+
+    .id-card .photo-frame {
+      border-radius: 6px;
+      overflow: hidden;
+      aspect-ratio: 1 / 1;
+      background: var(--accent-soft);
+    }
+
+    .id-card .photo-frame img {
+      width: 100%; height: 100%; object-fit: cover; display: block;
+    }
+
+    .id-card .stamp-wrap {
+      position: absolute;
+      bottom: -18px;
+      right: -18px;
+      width: 92px; height: 92px;
+      transform: rotate(-10deg);
+    }
+
+    .id-card .meta {
+      font-family: var(--font-mono);
+      font-size: 0.74rem;
+      margin-top: 1.1rem;
+      border-top: 1px dashed var(--line);
+      padding-top: 0.85rem;
+    }
+
+    .id-card .meta-row {
+      display: flex;
+      justify-content: space-between;
+      padding: 0.28rem 0;
+      color: var(--ink);
+    }
+
+    .id-card .meta-row .k { color: var(--ink-soft); text-transform: uppercase; letter-spacing: 0.04em; }
+
+    .hero-copy h1 {
+      font-family: var(--font-display);
+      font-weight: 600;
+      font-size: 3.1rem;
+      letter-spacing: -0.01em;
+      color: var(--ink);
+      line-height: 1.05;
+    }
+
+    .hero-copy h1 em {
+      font-style: italic;
+      font-weight: 400;
+      color: var(--accent);
+    }
+
+    .hero-copy .lead {
+      font-size: 1.02rem;
+      line-height: 1.75;
+      color: var(--ink);
+      margin-top: 1.3rem;
+      max-width: 620px;
+    }
+
+    .spec-strip {
+      margin-top: 2.1rem;
+      display: flex;
+      flex-wrap: wrap;
+      border-top: 1px solid var(--line);
+      border-bottom: 1px solid var(--line);
+    }
+
+    .spec-strip .cell {
+      padding: 0.85rem 1.4rem 0.85rem 0;
+      margin-right: 1.4rem;
+      border-right: 1px solid var(--line);
+    }
+    .spec-strip .cell:last-child { border-right: none; margin-right: 0; }
+
+    .spec-strip .cell .k {
+      font-family: var(--font-mono);
+      font-size: 0.66rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--ink-soft);
+      display: block;
+      margin-bottom: 0.25rem;
+    }
+
+    .spec-strip .cell .v {
+      font-weight: 600;
+      color: var(--ink);
+      font-size: 0.94rem;
+    }
+
+    /* ===== ABOUT (ink-dark) ===== */
+    #about { background-color: var(--ink-dark); color: #DCE6DF; }
+
+    .entry-card {
+      border-left: 3px solid var(--accent);
+      background: rgba(255,255,255,0.03);
+      padding: 1.9rem 1.9rem 1.9rem 1.7rem;
+      height: 100%;
       position: relative;
     }
 
-    .hero .profile-img {
-      width: 170px;
-      height: 170px;
-      object-fit: cover;
-      border: 5px solid #ffffff;
-      box-shadow: 0 16px 40px -8px rgba(0, 0, 0, 0.12);
-      transition: transform 0.4s ease;
+    .entry-card .entry-tag {
+      font-family: var(--font-mono);
+      font-size: 0.68rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: #9FB6A6;
+      margin-bottom: 0.9rem;
+      display: block;
     }
 
-    .hero .profile-img:hover {
-      transform: scale(1.02);
-    }
-
-    .hero h1 {
-      font-weight: 700;
-      font-size: 3rem;
-      letter-spacing: -0.02em;
-      color: #1e2a3a;
-      margin-top: 1.2rem;
-    }
-
-    .hero h1 span {
-      color: #4a5f73;
+    .entry-card p {
+      font-size: 0.97rem;
+      line-height: 1.85;
       font-weight: 300;
-    }
-
-    .hero .lead {
-      max-width: 740px;
-      margin: 1.2rem auto 0;
-      font-size: 1.05rem;
-      line-height: 1.7;
-      color: #2c3e50;
-      font-weight: 400;
-    }
-
-    .hero .badge-group {
-      margin-top: 2rem;
-      gap: 0.7rem;
-      flex-wrap: wrap;
-      justify-content: center;
-    }
-
-    .hero .badge-group .badge {
-      background: #4a5f73;
-      color: #fff;
-      font-weight: 500;
-      padding: 0.5rem 1.4rem;
-      border-radius: 40px;
-      font-size: 0.85rem;
-      letter-spacing: 0.2px;
-    }
-
-    /* ===== ABOUT (section gelap) ===== */
-    #about {
-      background-color: #2c3e50;
-      color: #e8edf2;
-    }
-
-    #about h2 {
-      color: #ffffff;
-    }
-
-    #about h2:after {
-      background: #b0c4d9;
-    }
-
-    #about .about-card {
-      background: rgba(255, 255, 255, 0.06);
-      backdrop-filter: blur(4px);
-      border-radius: 20px;
-      padding: 2rem 1.8rem;
-      height: 100%;
-      border: 1px solid rgba(255, 255, 255, 0.07);
-      transition: all 0.3s ease;
-    }
-
-    #about .about-card:hover {
-      background: rgba(255, 255, 255, 0.10);
-      transform: translateY(-3px);
-    }
-
-    #about .about-card p {
-      font-size: 0.98rem;
-      line-height: 1.8;
-      font-weight: 300;
+      color: #D7E1D9;
       margin-bottom: 0;
-      color: #dce3ec;
     }
 
     /* ===== PROJECTS ===== */
-    #project {
-      background-color: #f5f7fa;
-    }
+    #project { background-color: var(--paper); }
 
-    #project h2:after {
-      background: #7c8ea0;
-    }
-
-    .project-card {
-      background: #ffffff;
-      border: none;
-      border-radius: 20px;
+    .spec-card {
+      background: var(--paper-card);
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
       overflow: hidden;
-      box-shadow: 0 6px 24px rgba(0, 0, 0, 0.04);
-      transition: all 0.35s ease;
       height: 100%;
+      transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease;
     }
 
-    .project-card:hover {
-      transform: translateY(-6px);
-      box-shadow: 0 16px 40px -8px rgba(44, 62, 80, 0.12);
+    .spec-card:hover {
+      transform: translateY(-4px);
+      border-color: var(--accent);
+      box-shadow: 0 10px 28px -12px rgba(30, 43, 36, 0.25);
     }
 
-    .project-card img {
-      height: 190px;
-      object-fit: cover;
-      border-bottom: 2px solid #dce3ec;
+    .spec-card .thumb { position: relative; }
+
+    .spec-card .thumb img {
+      height: 175px; width: 100%; object-fit: cover; display: block;
+      border-bottom: 1px solid var(--line);
     }
 
-    .project-card .card-body {
-      padding: 1.4rem 1.2rem;
+    .spec-card .thumb .pid {
+      position: absolute;
+      top: 10px; left: 10px;
+      font-family: var(--font-mono);
+      font-size: 0.66rem;
+      letter-spacing: 0.06em;
+      background: var(--ink-dark);
+      color: #F1F3EC;
+      padding: 0.25rem 0.55rem;
+      border-radius: 3px;
     }
 
-    .project-card .card-title {
-      font-weight: 700;
-      font-size: 1.05rem;
-      color: #1e2a3a;
-    }
+    .spec-card .body { padding: 1.3rem 1.2rem 1.4rem; }
 
-    .project-card .card-text {
-      color: #4a5f73;
-      font-size: 0.92rem;
-      line-height: 1.5;
-    }
-
-    .project-card .btn-outline-custom {
-      border: 2px solid #7c8ea0;
-      color: #2c3e50;
-      border-radius: 40px;
-      padding: 0.35rem 1.2rem;
+    .spec-card .title {
+      font-family: var(--font-display);
       font-weight: 600;
-      font-size: 0.82rem;
-      transition: all 0.3s ease;
+      font-size: 1.08rem;
+      color: var(--ink);
+      margin-bottom: 0.5rem;
     }
 
-    .project-card .btn-outline-custom:hover {
-      background: #2c3e50;
-      border-color: #2c3e50;
-      color: #fff;
+    .spec-card .desc {
+      color: var(--ink-soft);
+      font-size: 0.9rem;
+      line-height: 1.55;
+      margin-bottom: 1rem;
     }
+
+    .link-arrow {
+      font-family: var(--font-mono);
+      font-size: 0.8rem;
+      font-weight: 500;
+      text-decoration: none;
+      color: var(--accent);
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      border-bottom: 1px solid transparent;
+      transition: border-color 0.2s ease, gap 0.2s ease;
+    }
+
+    .link-arrow:hover { border-color: var(--accent); gap: 0.6rem; color: var(--accent); }
 
     /* ===== TRAINING ===== */
-    #training {
-      background-color: #2c3e50;
-    }
+    #training { background-color: var(--ink-dark); }
 
-    #training h2 {
-      color: #ffffff;
-    }
-
-    #training h2:after {
-      background: #b0c4d9;
-    }
-
-    .training-card {
-      background: #ffffff;
-      border: none;
-      border-radius: 20px;
+    .cert-card {
+      background: #1D2A22;
+      border: 1px solid var(--line-dark);
+      border-radius: var(--radius);
       overflow: hidden;
-      box-shadow: 0 6px 24px rgba(0, 0, 0, 0.06);
-      transition: all 0.35s ease;
       height: 100%;
+      position: relative;
+      transition: border-color 0.25s ease, transform 0.25s ease;
     }
 
-    .training-card:hover {
-      transform: translateY(-5px);
-      box-shadow: 0 16px 32px -8px rgba(0, 0, 0, 0.15);
+    .cert-card:hover { transform: translateY(-3px); border-color: var(--accent); }
+
+    .cert-card .thumb { position: relative; }
+
+    .cert-card img { height: 160px; width: 100%; object-fit: cover; display: block; }
+
+    .cert-card .cert-stamp {
+      position: absolute;
+      bottom: -14px; right: -14px;
+      width: 66px; height: 66px;
+      transform: rotate(8deg);
+      opacity: 0.92;
     }
 
-    .training-card img {
-      height: 170px;
-      object-fit: cover;
-    }
+    .cert-card .cert-stamp .stamp-badge text { fill: #E6B7AE; }
+    .cert-card .cert-stamp .stamp-ring,
+    .cert-card .cert-stamp .stamp-core,
+    .cert-card .cert-stamp .stamp-check { stroke: #E6B7AE; }
 
-    .training-card .card-body {
-      padding: 1rem 0.8rem;
-    }
-
-    .training-card .card-title {
-      font-weight: 700;
-      color: #1e2a3a;
-      font-size: 0.95rem;
+    .cert-card .cert-title {
+      font-family: var(--font-mono);
+      font-size: 0.82rem;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
       text-align: center;
-      letter-spacing: 0.3px;
+      color: #EAF1EA;
+      padding: 1.1rem 0.6rem 1rem;
     }
 
     /* ===== CONTACT ===== */
-    #contact {
-      background-color: #f5f7fa;
-    }
+    #contact { background-color: var(--paper); }
 
-    #contact h2:after {
-      background: #7c8ea0;
-    }
-
-    .contact-item {
+    .contact-row {
       display: flex;
       align-items: center;
       gap: 1rem;
-      background: #ffffff;
-      padding: 0.9rem 1.5rem;
-      border-radius: 60px;
-      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.03);
-      transition: all 0.3s ease;
-      border: 1px solid #e2e8f0;
+      background: var(--paper-card);
+      padding: 1rem 1.3rem;
+      border: 1px solid var(--line);
+      border-left: 3px solid var(--accent);
+      border-radius: 6px;
+      transition: border-color 0.25s ease, transform 0.25s ease;
     }
 
-    .contact-item:hover {
-      transform: translateY(-3px);
-      box-shadow: 0 12px 28px -8px rgba(44, 62, 80, 0.08);
-      border-color: #b0c4d9;
+    .contact-row:hover { transform: translateX(3px); border-left-color: var(--rose); }
+
+    .contact-row i { font-size: 1.4rem; color: var(--accent); width: 30px; text-align: center; }
+
+    .contact-row .tag {
+      font-family: var(--font-mono);
+      font-size: 0.68rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--ink-soft);
+      display: block;
+      margin-bottom: 0.15rem;
     }
 
-    .contact-item i {
-      font-size: 1.6rem;
-      color: #4a5f73;
-      width: 36px;
-      text-align: center;
+    .contact-row .val { font-size: 0.95rem; color: var(--ink); font-weight: 500; }
+
+    .form-sheet {
+      background: var(--paper-card);
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      padding: 2.4rem 2.2rem;
     }
 
-    .contact-item h3 {
-      font-size: 0.85rem;
-      font-weight: 600;
-      margin-bottom: 0;
-      color: #1e2a3a;
-      letter-spacing: 0.2px;
+    .form-sheet label {
+      font-family: var(--font-mono);
+      font-size: 0.7rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--ink-soft);
+      margin-bottom: 0.4rem;
+      display: block;
     }
 
-    .contact-item p {
-      margin-bottom: 0;
-      color: #4a5f73;
-      font-size: 0.92rem;
-    }
-
-    .form-control {
-      border-radius: 30px;
-      padding: 0.7rem 1.2rem;
-      border: 2px solid #e2e8f0;
-      font-size: 0.92rem;
-      transition: all 0.3s ease;
-      background: #ffffff;
-    }
-
-    .form-control:focus {
-      border-color: #7c8ea0;
-      box-shadow: 0 0 0 4px rgba(124, 142, 160, 0.12);
-    }
-
-    .btn-primary-custom {
-      background: #2c3e50;
+    .form-sheet .form-control {
       border: none;
-      border-radius: 40px;
-      padding: 0.7rem 2.5rem;
+      border-bottom: 1px solid var(--line);
+      border-radius: 0;
+      padding: 0.55rem 0.1rem;
+      font-size: 0.95rem;
+      background: transparent;
+    }
+
+    .form-sheet .form-control:focus {
+      border-color: var(--accent);
+      box-shadow: none;
+    }
+
+    .btn-ink {
+      background: var(--ink);
+      border: none;
+      border-radius: 4px;
+      padding: 0.8rem 2rem;
       font-weight: 600;
       color: #fff;
-      transition: all 0.3s ease;
-      letter-spacing: 0.3px;
+      letter-spacing: 0.02em;
+      transition: background 0.25s ease, transform 0.15s ease;
     }
 
-    .btn-primary-custom:hover {
-      background: #1e2a3a;
-      transform: translateY(-2px);
-      box-shadow: 0 8px 20px -6px rgba(44, 62, 80, 0.3);
+    .btn-ink:hover { background: var(--accent); color: #fff; transform: translateY(-1px); }
+
+    .my-alert {
+      background: var(--accent-soft);
+      border: 1px solid var(--accent);
+      color: var(--ink);
+      border-radius: 6px;
     }
 
     /* ===== FOOTER ===== */
     footer {
-      background: #1e2a3a !important;
-      padding: 1.5rem 0;
+      background: var(--ink-dark) !important;
+      padding: 1.6rem 0;
+      border-top: 1px solid var(--line-dark);
     }
 
     footer p {
-      margin: 0;
-      color: #94a8b9;
-      font-weight: 400;
-      font-size: 0.92rem;
+      font-family: var(--font-mono);
+      font-size: 0.78rem;
+      color: #9FB0A5;
+      text-align: center;
     }
 
-    footer a {
-      color: #b0c4d9 !important;
-      text-decoration: none;
-      font-weight: 600;
-      transition: color 0.3s ease;
-    }
-
-    footer a:hover {
-      color: #ffffff !important;
-    }
-
-    /* ===== WAVE ===== */
-    .wave-spacer {
-      display: block;
-      line-height: 0;
-    }
+    footer a { color: #B9CDBE !important; font-weight: 600; text-decoration: none; }
+    footer a:hover { color: #fff !important; }
 
     /* ===== RESPONSIVE ===== */
+    @media (max-width: 991px) {
+      .id-card { margin-bottom: 2.5rem; }
+    }
+
     @media (max-width: 768px) {
-      .hero h1 {
-        font-size: 2.2rem;
-      }
-
-      .hero .lead {
-        font-size: 0.95rem;
-      }
-
-      .contact-item {
-        flex-direction: column;
-        text-align: center;
-        padding: 1rem;
-        border-radius: 20px;
-      }
-
-      .contact-item i {
-        font-size: 1.8rem;
-        width: auto;
-      }
+      section { padding-top: 70px; padding-bottom: 46px; }
+      .hero-copy h1 { font-size: 2.15rem; text-align: center; }
+      .hero-copy .lead { text-align: center; margin-left: auto; margin-right: auto; }
+      .spec-strip { justify-content: center; }
+      .contact-row { flex-direction: column; text-align: center; }
+      .contact-row i { width: auto; }
+      .form-sheet { padding: 1.8rem 1.4rem; }
     }
   </style>
 </head>
 <body id="home">
 
+  <!-- Hidden defs: reusable circular "QC · Approved" stamp signature -->
+  <svg width="0" height="0" style="position:absolute" aria-hidden="true">
+    <defs>
+      <symbol id="qc-stamp" viewBox="0 0 100 100">
+        <path id="stampCirclePath" d="M 50,50 m -37,0 a 37,37 0 1,1 74,0 a 37,37 0 1,1 -74,0" fill="none"/>
+        <circle class="stamp-ring" cx="50" cy="50" r="46" fill="none" stroke-width="1.4"/>
+        <circle class="stamp-core" cx="50" cy="50" r="27" stroke-width="1.2"/>
+        <text font-size="7.6" letter-spacing="2" font-weight="500">
+          <textPath href="#stampCirclePath" startOffset="0%">QUALITY CONTROL • APPROVED • </textPath>
+        </text>
+        <path class="stamp-check" d="M40,50 l7,7 l14,-16" fill="none" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round"/>
+      </symbol>
+    </defs>
+  </svg>
+
   <!-- ===== NAVBAR ===== -->
   <nav class="navbar navbar-expand-lg navbar-dark fixed-top">
     <div class="container">
-      <a class="navbar-brand" href="#home">RAGIL<span>_SAPTA</span></a>
+      <a class="navbar-brand" href="#home"><span class="status-dot"></span>Ragil · Sapta</a>
       <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
@@ -457,39 +579,54 @@
   </nav>
 
   <!-- ===== HERO ===== -->
-  <section id="home" class="hero text-center">
+  <section id="home" class="hero">
     <div class="container">
-      <img src="asset/foto/r1.jpg" alt="Ragil Sapta" class="rounded-circle img-thumbnail profile-img" data-aos="zoom-in" data-aos-duration="700" />
-      <h1 data-aos="fade-up" data-aos-delay="120">Ragil <span>Sapta</span></h1>
-      <p class="lead mx-auto" data-aos="fade-up" data-aos-delay="220">
-        Lebih dari 5 tahun saya bekerja sebagai Quality Control di industri kosmetik, saya telah mengembangkan keahlian dan keterampilan saya dalam memastikan kualitas produk dan proses produksi di Industri Kosmetik, pengalaman saya
-        mencakup berbagai aspek, mulai dari inspeksi bahan, produk hingga menerapkan sistem manajemen kualitas yang ketat.
-      </p>
-      <div class="d-flex badge-group" data-aos="fade-up" data-aos-delay="320">
-        <span class="badge"><i class="bi bi-check-circle-fill me-1"></i> QC Expert</span>
-        <span class="badge"><i class="bi bi-mortarboard-fill me-1"></i> CPKB Certified</span>
-        <span class="badge"><i class="bi bi-star-fill me-1"></i> 5+ Years</span>
+      <div class="row align-items-center g-5">
+        <div class="col-lg-5" data-aos="fade-up" data-aos-duration="600">
+          <div class="id-card">
+            <div class="photo-frame">
+              <img src="asset/foto/r1.jpg" alt="Ragil Sapta" />
+            </div>
+            <div class="stamp-wrap">
+              <svg class="stamp-badge" viewBox="0 0 100 100"><use href="#qc-stamp"/></svg>
+            </div>
+            <div class="meta">
+              <div class="meta-row"><span class="k">Nama</span><span>Ragil Sapta</span></div>
+              <div class="meta-row"><span class="k">Peran</span><span>Quality Control</span></div>
+              <div class="meta-row"><span class="k">Status</span><span>Approved ✓</span></div>
+            </div>
+          </div>
+        </div>
+        <div class="col-lg-7 hero-copy" data-aos="fade-up" data-aos-duration="600" data-aos-delay="120">
+          <span class="eyebrow">Profil</span>
+          <h1>Ragil <em>Sapta</em></h1>
+          <p class="lead">
+            Lebih dari 5 tahun saya bekerja sebagai Quality Control di industri kosmetik, saya telah mengembangkan keahlian dan keterampilan saya dalam memastikan kualitas produk dan proses produksi di Industri Kosmetik, pengalaman saya
+            mencakup berbagai aspek, mulai dari inspeksi bahan, produk hingga menerapkan sistem manajemen kualitas yang ketat.
+          </p>
+          <div class="spec-strip">
+            <div class="cell"><span class="k">Keahlian</span><span class="v">QC Expert</span></div>
+            <div class="cell"><span class="k">Sertifikasi</span><span class="v">CPKB Certified</span></div>
+            <div class="cell"><span class="k">Pengalaman</span><span class="v">5+ Years</span></div>
+          </div>
+        </div>
       </div>
-    </div>
-    <!-- Wave -->
-    <div class="wave-spacer">
-      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320">
-        <path fill="#2c3e50" fill-opacity="1" d="M0,256L24,250.7C48,245,96,235,144,224C192,213,240,203,288,176C336,149,384,107,432,90.7C480,75,528,85,576,101.3C624,117,672,139,720,149.3C768,160,816,160,864,138.7C912,117,960,75,1008,85.3C1056,96,1104,160,1152,192C1200,224,1248,224,1296,197.3C1344,171,1392,117,1416,90.7L1440,64L1440,320L1416,320C1392,320,1344,320,1296,320C1248,320,1200,320,1152,320C1104,320,1056,320,1008,320C960,320,912,320,864,320C816,320,768,320,720,320C672,320,624,320,576,320C528,320,480,320,432,320C384,320,336,320,288,320C240,320,192,320,144,320C96,320,48,320,24,320L0,320Z"></path>
-      </svg>
     </div>
   </section>
 
+  <div class="tear-line on-dark"></div>
+
   <!-- ===== ABOUT ===== -->
-  <section id="about">
-    <div class="container" data-aos-duration="1100">
-      <div class="row text-center mb-4">
-        <div class="col">
-          <h2>About Me</h2>
-        </div>
+  <section id="about" class="section-dark">
+    <div class="container">
+      <div class="section-head">
+        <span class="eyebrow">Tentang</span>
+        <h2>About Me</h2>
       </div>
-      <div class="row g-4 justify-content-center">
-        <div class="col-md-5" data-aos="fade-right" data-aos-offset="180">
-          <div class="about-card">
+      <div class="row g-4">
+        <div class="col-md-6" data-aos="fade-up" data-aos-delay="80">
+          <div class="entry-card">
+            <span class="entry-tag">Entry A — Etos Kerja</span>
             <p>
               Saya adalah seorang profesional yang memiliki etos kerja tinggi dan dikenal sebagai individu yang rajin serta berdedikasi dalam setiap tugas yang saya jalani. <br><br>
               Dengan pengalaman dan pengetahuan yang mendalam dalam industri kosmetik, saya memahami secara menyeluruh alur proses produksi dari bahan mentah yang datang hingga produk akhir (finish good).<br><br>
@@ -497,8 +634,9 @@
             </p>
           </div>
         </div>
-        <div class="col-md-5" data-aos="fade-left" data-aos-offset="180" data-aos-delay="180">
-          <div class="about-card">
+        <div class="col-md-6" data-aos="fade-up" data-aos-delay="160">
+          <div class="entry-card">
+            <span class="entry-tag">Entry B — Ketekunan</span>
             <p>
               Oleh karena itu, saya selalu memastikan setiap tugas dilakukan dengan teliti, efisien, dan tepat waktu, saya tidak ragu untuk mengambil inisiatif dan selalu mencari cara untuk meningkatkan efisiensi dan efektivitas dalam
               proses kerja.<br><br>
@@ -509,192 +647,180 @@
         </div>
       </div>
     </div>
-    <!-- Wave -->
-    <div class="wave-spacer">
-      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320">
-        <path fill="#f5f7fa" fill-opacity="1" d="M0,288L0,288L96,288L96,160L192,160L192,0L288,0L288,64L384,64L384,160L480,160L480,128L576,128L576,160L672,160L672,224L768,224L768,64L864,64L864,32L960,32L960,192L1056,192L1056,224L1152,224L1152,96L1248,96L1248,64L1344,64L1344,32L1440,32L1440,320L1344,320L1344,320L1248,320L1248,320L1152,320L1152,320L1056,320L1056,320L960,320L960,320L864,320L864,320L768,320L768,320L672,320L672,320L576,320L576,320L480,320L480,320L384,320L384,320L288,320L288,320L192,320L192,320L96,320L96,320L0,320L0,320Z"></path>
-      </svg>
-    </div>
   </section>
+
+  <div class="tear-line on-dark"></div>
 
   <!-- ===== PROJECTS ===== -->
   <section id="project">
     <div class="container">
-      <div class="row text-center mb-4">
-        <div class="col">
-          <h2>My Projects</h2>
+      <div class="section-head">
+        <span class="eyebrow">Portofolio</span>
+        <h2>My Projects</h2>
+      </div>
+      <div class="row g-4">
+        <div class="col-md-6 col-lg-3" data-aos="fade-up" data-aos-delay="80">
+          <div class="spec-card">
+            <div class="thumb">
+              <img src="asset/project1/RESUMEPO1.jpg" alt="Project 1" />
+              <span class="pid">PRJ.01</span>
+            </div>
+            <div class="body">
+              <div class="title">Data All In One</div>
+              <p class="desc">Sistem produksi terintegrasi untuk efisiensi data.</p>
+              <a href="project1.html" class="link-arrow">Lihat Detail →</a>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-6 col-lg-3" data-aos="fade-up" data-aos-delay="130">
+          <div class="spec-card">
+            <div class="thumb">
+              <img src="asset/project2/project2.jpg" alt="Project 2" />
+              <span class="pid">PRJ.02</span>
+            </div>
+            <div class="body">
+              <div class="title">Integrasi Standar</div>
+              <p class="desc">Menyelaraskan catatan pengujian dengan standar industri.</p>
+              <a href="project2.html" class="link-arrow">Lihat Detail →</a>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-6 col-lg-3" data-aos="fade-up" data-aos-delay="180">
+          <div class="spec-card">
+            <div class="thumb">
+              <img src="asset/project3/webportofolio.jpg" alt="Project 3" />
+              <span class="pid">PRJ.03</span>
+            </div>
+            <div class="body">
+              <div class="title">Website Portofolio</div>
+              <p class="desc">Portofolio profesional berbasis web modern.</p>
+              <a href="index.html" class="link-arrow">Lihat →</a>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-6 col-lg-3" data-aos="fade-up" data-aos-delay="230">
+          <div class="spec-card">
+            <div class="thumb">
+              <img src="asset/project4/takoyaki.jpg" alt="Project 4" />
+              <span class="pid">PRJ.04</span>
+            </div>
+            <div class="body">
+              <div class="title">Fotografi</div>
+              <p class="desc">Eksplorasi visual melalui fotografi produk.</p>
+              <a href="project4.html" class="link-arrow">Lihat →</a>
+            </div>
+          </div>
         </div>
       </div>
-      <div class="row g-4 justify-content-center">
-        <!-- Project 1 -->
-        <div class="col-md-6 col-lg-3" data-aos="flip-left" data-aos-duration="500" data-aos-delay="80">
-          <div class="project-card">
-            <img src="asset/project1/RESUMEPO1.jpg" class="card-img-top" alt="Project 1" />
-            <div class="card-body">
-              <h5 class="card-title">Data All In One</h5>
-              <p class="card-text">Sistem produksi terintegrasi untuk efisiensi data.</p>
-              <a href="project1.html" class="btn btn-outline-custom">Lihat Detail</a>
-            </div>
-          </div>
-        </div>
-        <!-- Project 2 -->
-        <div class="col-md-6 col-lg-3" data-aos="flip-left" data-aos-duration="500" data-aos-delay="130">
-          <div class="project-card">
-            <img src="asset/project2/project2.jpg" class="card-img-top" alt="Project 2" />
-            <div class="card-body">
-              <h5 class="card-title">Integrasi Standar</h5>
-              <p class="card-text">Menyelaraskan catatan pengujian dengan standar industri.</p>
-              <a href="project2.html" class="btn btn-outline-custom">Lihat Detail</a>
-            </div>
-          </div>
-        </div>
-        <!-- Project 3 -->
-        <div class="col-md-6 col-lg-3" data-aos="flip-left" data-aos-duration="500" data-aos-delay="180">
-          <div class="project-card">
-            <img src="asset/project3/webportofolio.jpg" class="card-img-top" alt="Project 3" />
-            <div class="card-body">
-              <h5 class="card-title">Website Portofolio</h5>
-              <p class="card-text">Portofolio profesional berbasis web modern.</p>
-              <a href="index.html" class="btn btn-outline-custom">Lihat</a>
-            </div>
-          </div>
-        </div>
-        <!-- Project 4 -->
-        <div class="col-md-6 col-lg-3" data-aos="flip-left" data-aos-duration="500" data-aos-delay="230">
-          <div class="project-card">
-            <img src="asset/project4/takoyaki.jpg" class="card-img-top" alt="Project 4" />
-            <div class="card-body">
-              <h5 class="card-title">Fotografi</h5>
-              <p class="card-text">Eksplorasi visual melalui fotografi produk.</p>
-              <a href="project4.html" class="btn btn-outline-custom">Lihat</a>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-    <!-- Wave -->
-    <div class="wave-spacer">
-      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320">
-        <path fill="#2c3e50" fill-opacity="1" d="M0,256L24,250.7C48,245,96,235,144,224C192,213,240,203,288,176C336,149,384,107,432,90.7C480,75,528,85,576,101.3C624,117,672,139,720,149.3C768,160,816,160,864,138.7C912,117,960,75,1008,85.3C1056,96,1104,160,1152,192C1200,224,1248,224,1296,197.3C1344,171,1392,117,1416,90.7L1440,64L1440,320L1416,320C1392,320,1344,320,1296,320C1248,320,1200,320,1152,320C1104,320,1056,320,1008,320C960,320,912,320,864,320C816,320,768,320,720,320C672,320,624,320,576,320C528,320,480,320,432,320C384,320,336,320,288,320C240,320,192,320,144,320C96,320,48,320,24,320L0,320Z"></path>
-      </svg>
     </div>
   </section>
 
+  <div class="tear-line on-dark"></div>
+
   <!-- ===== TRAINING ===== -->
-  <section id="training">
+  <section id="training" class="section-dark">
     <div class="container">
-      <div class="row text-center mb-4">
-        <div class="col">
-          <h2>Training & Sertifikasi</h2>
+      <div class="section-head">
+        <span class="eyebrow">Kredensial</span>
+        <h2>Training & Sertifikasi</h2>
+      </div>
+      <div class="row g-4">
+        <div class="col-md-6 col-lg-3" data-aos="fade-up" data-aos-delay="80">
+          <div class="cert-card">
+            <div class="thumb">
+              <img src="asset/sertifikat/cpkb.jpg" alt="CPKB" />
+              <div class="cert-stamp"><svg class="stamp-badge" viewBox="0 0 100 100"><use href="#qc-stamp"/></svg></div>
+            </div>
+            <div class="cert-title">CPKB</div>
+          </div>
+        </div>
+        <div class="col-md-6 col-lg-3" data-aos="fade-up" data-aos-delay="130">
+          <div class="cert-card">
+            <div class="thumb">
+              <img src="asset/sertifikat/5r.jpg" alt="5R" />
+              <div class="cert-stamp"><svg class="stamp-badge" viewBox="0 0 100 100"><use href="#qc-stamp"/></svg></div>
+            </div>
+            <div class="cert-title">5R</div>
+          </div>
+        </div>
+        <div class="col-md-6 col-lg-3" data-aos="fade-up" data-aos-delay="180">
+          <div class="cert-card">
+            <div class="thumb">
+              <img src="asset/sertifikat/k3.jpg" alt="K3" />
+              <div class="cert-stamp"><svg class="stamp-badge" viewBox="0 0 100 100"><use href="#qc-stamp"/></svg></div>
+            </div>
+            <div class="cert-title">K3</div>
+          </div>
+        </div>
+        <div class="col-md-6 col-lg-3" data-aos="fade-up" data-aos-delay="230">
+          <div class="cert-card">
+            <div class="thumb">
+              <img src="asset/sertifikat/halal.jpg" alt="Halal" />
+              <div class="cert-stamp"><svg class="stamp-badge" viewBox="0 0 100 100"><use href="#qc-stamp"/></svg></div>
+            </div>
+            <div class="cert-title">Halal</div>
+          </div>
         </div>
       </div>
-      <div class="row g-4 justify-content-center">
-        <div class="col-md-6 col-lg-3" data-aos="flip-left" data-aos-duration="500" data-aos-delay="80">
-          <div class="training-card">
-            <img src="asset/sertifikat/cpkb.jpg" class="card-img-top" alt="CPKB" />
-            <div class="card-body">
-              <h5 class="card-title">CPKB</h5>
-            </div>
-          </div>
-        </div>
-        <div class="col-md-6 col-lg-3" data-aos="flip-left" data-aos-duration="500" data-aos-delay="130">
-          <div class="training-card">
-            <img src="asset/sertifikat/5r.jpg" class="card-img-top" alt="5R" />
-            <div class="card-body">
-              <h5 class="card-title">5R</h5>
-            </div>
-          </div>
-        </div>
-        <div class="col-md-6 col-lg-3" data-aos="flip-left" data-aos-duration="500" data-aos-delay="180">
-          <div class="training-card">
-            <img src="asset/sertifikat/k3.jpg" class="card-img-top" alt="K3" />
-            <div class="card-body">
-              <h5 class="card-title">K3</h5>
-            </div>
-          </div>
-        </div>
-        <div class="col-md-6 col-lg-3" data-aos="flip-left" data-aos-duration="500" data-aos-delay="230">
-          <div class="training-card">
-            <img src="asset/sertifikat/halal.jpg" class="card-img-top" alt="Halal" />
-            <div class="card-body">
-              <h5 class="card-title">Halal</h5>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-    <!-- Wave -->
-    <div class="wave-spacer">
-      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320">
-        <path fill="#f5f7fa" fill-opacity="1" d="M0,288L0,288L96,288L96,160L192,160L192,0L288,0L288,64L384,64L384,160L480,160L480,128L576,128L576,160L672,160L672,224L768,224L768,64L864,64L864,32L960,32L960,192L1056,192L1056,224L1152,224L1152,96L1248,96L1248,64L1344,64L1344,32L1440,32L1440,320L1344,320L1344,320L1248,320L1248,320L1152,320L1152,320L1056,320L1056,320L960,320L960,320L864,320L864,320L768,320L768,320L672,320L672,320L576,320L576,320L480,320L480,320L384,320L384,320L288,320L288,320L192,320L192,320L96,320L96,320L0,320L0,320Z"></path>
-      </svg>
     </div>
   </section>
+
+  <div class="tear-line"></div>
 
   <!-- ===== CONTACT ===== -->
   <section id="contact">
     <div class="container">
-      <div class="row text-center mb-4">
-        <div class="col">
-          <h2>Contact Me</h2>
-        </div>
+      <div class="section-head">
+        <span class="eyebrow">Hubungi</span>
+        <h2>Contact Me</h2>
       </div>
 
       <!-- Contact Info -->
-      <div class="row g-3 justify-content-center mb-5">
+      <div class="row g-3 mb-5">
         <div class="col-md-6 col-lg-4" data-aos="fade-up" data-aos-delay="80">
-          <div class="contact-item">
+          <div class="contact-row">
             <i class="bi bi-envelope-fill"></i>
-            <div>
-              <h3>Email</h3>
-              <p>ragilsapta.rs@gmail.com</p>
-            </div>
+            <div><span class="tag">Email</span><span class="val">ragilsapta.rs@gmail.com</span></div>
           </div>
         </div>
         <div class="col-md-6 col-lg-4" data-aos="fade-up" data-aos-delay="130">
-          <div class="contact-item">
+          <div class="contact-row">
             <i class="bi bi-whatsapp"></i>
-            <div>
-              <h3>WhatsApp</h3>
-              <p>+62 896 4305 6028</p>
-            </div>
+            <div><span class="tag">WhatsApp</span><span class="val">+62 896 4305 6028</span></div>
           </div>
         </div>
         <div class="col-md-6 col-lg-4" data-aos="fade-up" data-aos-delay="180">
-          <div class="contact-item">
+          <div class="contact-row">
             <i class="bi bi-geo-alt-fill"></i>
-            <div>
-              <h3>Lokasi</h3>
-              <p>Tangerang, Indonesia</p>
-            </div>
+            <div><span class="tag">Lokasi</span><span class="val">Tangerang, Indonesia</span></div>
           </div>
         </div>
       </div>
 
       <!-- Form -->
       <div class="row justify-content-center">
-        <div class="col-md-8 col-lg-6">
-          <div class="alert alert-success alert-dismissible fade show d-none my-alert" role="alert">
+        <div class="col-md-8 col-lg-6" data-aos="fade-up" data-aos-delay="100">
+          <div class="alert my-alert alert-dismissible fade show d-none" role="alert">
             <i class="bi bi-check-circle-fill me-2"></i> <strong>Terimakasih!</strong> Pesan anda sudah terkirim.
             <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
           </div>
 
-          <form name="submit-to-google-sheet" class="bg-white p-4 p-md-5 rounded-4 shadow-sm">
+          <form name="submit-to-google-sheet" class="form-sheet">
             <div class="mb-3">
-              <label for="name" class="form-label fw-semibold">Nama Lengkap</label>
+              <label for="name">Nama Lengkap</label>
               <input type="text" class="form-control" id="name" name="nama" placeholder="Masukkan nama Anda" />
             </div>
             <div class="mb-3">
-              <label for="email" class="form-label fw-semibold">Email</label>
+              <label for="email">Email</label>
               <input type="email" class="form-control" id="email" name="email" placeholder="contoh@email.com" />
             </div>
             <div class="mb-4">
-              <label for="pesan" class="form-label fw-semibold">Pesan</label>
+              <label for="pesan">Pesan</label>
               <textarea class="form-control" id="pesan" rows="4" name="pesan" placeholder="Tulis pesan Anda..."></textarea>
             </div>
             <div class="d-grid">
-              <button type="submit" class="btn btn-primary-custom btn-kirim">Kirim Pesan</button>
-              <button class="btn btn-primary-custom btn-loading d-none" type="button" disabled>
+              <button type="submit" class="btn-ink btn-kirim">Kirim Pesan</button>
+              <button class="btn-ink btn-loading d-none" type="button" disabled>
                 <span class="spinner-border spinner-border-sm me-2" role="status" aria-hidden="true"></span> Mengirim...
               </button>
             </div>
@@ -702,24 +828,18 @@
         </div>
       </div>
     </div>
-    <!-- Wave -->
-    <div class="wave-spacer">
-      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320">
-        <path fill="#1e2a3a" fill-opacity="1" d="M0,160L48,133.3C96,107,192,53,288,58.7C384,64,480,128,576,160C672,192,768,192,864,197.3C960,203,1056,213,1152,192C1248,171,1344,117,1392,90.7L1440,64L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z"></path>
-      </svg>
-    </div>
   </section>
 
   <!-- ===== FOOTER ===== -->
-  <footer class="text-center">
-    <p>Created with <i class="bi bi-heart-fill" style="color: #b0c4d9;"></i> by <a href="#" target="_blank">Ragil Sapta</a> &copy; 2026</p>
+  <footer>
+    <p>Created with <i class="bi bi-heart-fill" style="color: var(--accent);"></i> by <a href="#" target="_blank">Ragil Sapta</a> &copy; 2026</p>
   </footer>
 
   <!-- ===== SCRIPTS ===== -->
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
   <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
   <script>
-    AOS.init({ once: true, duration: 700 });
+    AOS.init({ once: true, duration: 600, easing: 'ease-out' });
   </script>
 
   <!-- Google Form Script -->
